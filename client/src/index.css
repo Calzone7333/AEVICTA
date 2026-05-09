@@ -1,0 +1,121 @@
+@import "tailwindcss";
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Cinzel:wght@400;700;900&family=Public+Sans:wght@300;400;500;600;700&display=swap');
+
+@theme {
+    --font-sans: 'Inter', system-ui, sans-serif;
+    --font-display: 'Rajdhani', sans-serif;
+    --font-logo: 'Cinzel', serif;
+    --font-menu: 'Public Sans', sans-serif;
+
+    --color-primary: #FF1744;
+    --color-primary-dark: #D50000;
+    --color-primary-light: #FF5252;
+    --color-navy: #01152B;
+
+    /* Custom Brand Colors */
+    --color-brand-red: #FF1744;
+    --color-brand-green: #00C853;
+    
+    /* Override Tailwind defaults for consistency */
+    --color-red-50: #FFF1F2;
+    --color-red-500: #FF1744;
+    --color-red-600: #D50000;
+    --color-red-700: #B71C1C;
+    
+    --color-green-50: #E8F5E9;
+    --color-green-500: #00C853;
+    --color-green-600: #00B34A;
+    --color-green-700: #008000;
+    
+    --color-emerald-50: #E8F5E9;
+    --color-emerald-500: #00C853;
+    --color-emerald-600: #00B34A;
+    --color-emerald-700: #008000;
+}
+
+@layer base {
+    body {
+        @apply font-sans antialiased text-slate-800 bg-white;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        @apply font-display font-black tracking-tight;
+    }
+
+    html {
+        font-size: 16px;
+    }
+
+    p {
+        font-family: 'Inter', system-ui, sans-serif;
+        font-size: 15px;
+        font-weight: 400;
+        line-height: 24.375px;
+        color: oklch(0.554 0.046 257.417);
+    }
+}
+
+.content-p {
+    font-family: 'Inter', system-ui, sans-serif !important;
+    font-size: 15px !important;
+    font-weight: 400 !important;
+    line-height: 24.375px !important;
+    color: oklch(0.554 0.046 257.417) !important;
+}
+
+.section-heading {
+    font-family: 'Rajdhani', sans-serif !important;
+    font-size: 38px !important;
+    font-weight: 900 !important;
+    line-height: 48px !important;
+    color: oklch(0.208 0.042 265.755) !important;
+}
+
+.faq-question {
+    font-family: 'Rajdhani', sans-serif !important;
+    font-size: 20px !important;
+    font-weight: 900 !important;
+    line-height: 28px !important;
+    color: oklch(0.208 0.042 265.755) !important;
+}
+
+.btn {
+  @apply px-8 py-4 font-black uppercase tracking-widest text-sm transition-all active:scale-[0.98] inline-flex items-center justify-center;
+}
+
+.btn-primary {
+  @apply bg-primary hover:bg-primary-dark text-white;
+}
+
+.container {
+  @apply max-w-[1400px] mx-auto px-6 lg:px-8;
+}
+
+.nav-link-animated {
+  @apply relative transition-colors duration-300;
+}
+
+.nav-link-animated::after {
+  content: '';
+  @apply absolute bottom-[-8px] left-0 w-full h-[3px] bg-primary scale-x-0 origin-left transition-transform duration-300 ease-out;
+}
+
+.nav-link-animated:hover::after, .nav-link-active::after {
+  @apply scale-x-100;
+}
+
+/* Custom modern scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+    background: var(--color-primary);
+    border-radius: 0;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--color-primary-dark);
+}
