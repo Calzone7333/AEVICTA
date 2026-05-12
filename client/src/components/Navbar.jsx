@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Facebook, Twitter, Linkedin, Instagram, Mail, Clock, Headset, Menu, X } from 'lucide-react';
+import { Facebook, Instagram, Mail, Clock, Headset, Menu, X } from 'lucide-react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -48,10 +48,20 @@ const Navbar = () => {
       <div className={`transition-all duration-500 overflow-hidden hidden lg:block ${isScrolled ? 'h-0 opacity-0' : 'h-auto opacity-100'}`}>
         <div className={`flex w-full text-[12px] font-medium transition-all duration-500 ${shouldBeWhite ? 'bg-slate-900 border-b border-slate-800' : 'bg-transparent border-b border-white/5'}`}>
           <div className={`px-8 py-1 flex items-center gap-5 transition-all duration-500 ${shouldBeWhite ? 'border-r border-slate-800' : 'border-r border-white/5'}`}>
-            <a href="#" className="text-white/80 hover:text-primary transition-colors"><Facebook size={14} fill="currentColor" /></a>
-            <a href="#" className="text-white/80 hover:text-primary transition-colors"><Twitter size={14} fill="currentColor" /></a>
-            <a href="#" className="text-white/80 hover:text-primary transition-colors"><Linkedin size={14} fill="currentColor" /></a>
-            <a href="#" className="text-white/80 hover:text-primary transition-colors"><Instagram size={14} /></a>
+            {[
+              { Icon: Facebook, url: 'https://www.facebook.com/profile.php?id=61589597423685' },
+              { Icon: Instagram, url: 'https://www.instagram.com/aevicta/' }
+            ].map((item, idx) => (
+              <a 
+                key={idx} 
+                href={item.url} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-white/80 hover:text-primary transition-colors"
+              >
+                <item.Icon size={14} {...(item.Icon === Instagram ? {} : { fill: 'currentColor' })} />
+              </a>
+            ))}
           </div>
           
           <div className="flex-1 px-8 py-1 flex justify-end items-center text-white/80">
@@ -164,9 +174,18 @@ const Navbar = () => {
               </div>
               
               <div className="flex items-center gap-4">
-                {[Facebook, Twitter, Linkedin, Instagram].map((Icon, idx) => (
-                  <a key={idx} href="#" className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 hover:bg-primary hover:text-white transition-all">
-                    <Icon size={18} />
+                {[
+                  { Icon: Facebook, url: 'https://www.facebook.com/profile.php?id=61589597423685' },
+                  { Icon: Instagram, url: 'https://www.instagram.com/aevicta/' }
+                ].map((item, idx) => (
+                  <a 
+                    key={idx} 
+                    href={item.url} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 hover:bg-primary hover:text-white transition-all"
+                  >
+                    <item.Icon size={18} />
                   </a>
                 ))}
               </div>

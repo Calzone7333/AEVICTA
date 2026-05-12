@@ -1,4 +1,4 @@
-import { Facebook, Twitter, Instagram, Mail, Phone, MapPin } from 'lucide-react';
+import { Facebook, Instagram, Mail, Phone, MapPin } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Footer = () => {
@@ -18,9 +18,18 @@ const Footer = () => {
                             Aevicta is a Chennai-based business loan assistance firm. Our entire focus is on helping Chennai's businesses get the funding they need, without the stress and confusion.
                         </p>
                         <div className="flex items-center gap-3">
-                            {[Facebook, Instagram].map((Icon, idx) => (
-                                <a key={idx} href="#" className="w-10 h-10 rounded bg-white/5 flex items-center justify-center text-slate-400 hover:bg-primary hover:text-white transition-all">
-                                    <Icon size={18} />
+                            {[
+                                { Icon: Facebook, url: 'https://www.facebook.com/profile.php?id=61589597423685' },
+                                { Icon: Instagram, url: 'https://www.instagram.com/aevicta/' }
+                            ].map((item, idx) => (
+                                <a 
+                                    key={idx} 
+                                    href={item.url} 
+                                    target="_blank" 
+                                    rel="noopener noreferrer"
+                                    className="w-10 h-10 rounded bg-white/5 flex items-center justify-center text-slate-400 hover:bg-primary hover:text-white transition-all"
+                                >
+                                    <item.Icon size={18} />
                                 </a>
                             ))}
                         </div>
@@ -90,14 +99,10 @@ const Footer = () => {
                 </div>
 
                 {/* Bottom Bar */}
-                <div className="pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
-                    <p className="text-slate-500 text-[14px]">
+                <div className="pt-10 border-t border-white/5 flex justify-center items-center">
+                    <p className="text-slate-500 text-[14px] text-center">
                         © 2026 Aevicta Finance. All rights reserved.
                     </p>
-                    <div className="flex items-center gap-8">
-                        <Link to="/terms" className="text-slate-500 hover:text-white transition-colors text-[14px]">Terms & Conditions</Link>
-                        <Link to="/privacy" className="text-slate-500 hover:text-white transition-colors text-[14px]">Privacy Policy</Link>
-                    </div>
                 </div>
             </div>
         </footer>
