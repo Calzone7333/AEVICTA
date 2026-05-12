@@ -1,39 +1,39 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Percent, CheckCircle2, RefreshCcw, Check, ArrowRight } from 'lucide-react';
+import { Percent, CheckCircle2, RefreshCcw, Check, ArrowRight, Zap, MapPin, Users } from 'lucide-react';
 
 const FeaturesSection = () => {
     const mainFeatures = [
         {
-            icon: Percent,
-            title: "Very Low Rates on All Loans",
-            desc: "Institutional competitive rates tailored for your growth."
+            icon: Zap,
+            title: "Fast and Stress-Free Process",
+            desc: "No endless queues. No confusing jargon. We simplify the entire loan journey from start to finish and make sure nothing falls through the cracks."
         },
         {
-            icon: CheckCircle2,
-            title: "99.9% Success Rate Guarantee",
-            desc: "Expertly processed applications with high approval odds."
+            icon: MapPin,
+            title: "Chennai-Rooted, Business-Focused",
+            desc: "We know Chennai's business landscape inside out. From the wholesale corridors of George Town to the tech parks of Sholinganallur, we understand what your business needs to grow."
         },
         {
-            icon: RefreshCcw,
-            title: "Flexible with Your Repayments",
-            desc: "Multiple tenure options to suit your financial flow."
+            icon: Users,
+            title: "100% Personalized Guidance",
+            desc: "No generic advice. We study your business, your goals, and your financials, then match you with the most suitable loan option available through our banking network."
         }
     ];
 
     const trustServices = [
-        "Credit Card Per Day", "Gold Loan Per Day",
-        "Personal Loan", "Mortgage Loan",
-        "Car / Auto Loan", "Education / Student Loan",
-        "Home Loan", "Wedding Loan"
+        "Business Term Loans", "Working Capital Loans",
+        "MSME and SME Loans", "Startup Funding",
+        "Loan Against Property", "Balance Transfer",
+        "Loan Top-Up", "Debt Restructuring"
     ];
 
     const trustSteps = [
-        { id: 1, text: "Easy loan solutions for small agency, business and companies" },
-        { id: 2, text: "Submit Required Document and Details for loan approval" },
-        { id: 3, text: "Take our loans now and pay later when studies completed" },
-        { id: 4, text: "Get small loans for more needs in 2 hours with less documents" }
+        { id: 1, text: "Assess your business goals and current financial standing" },
+        { id: 2, text: "Match you with the best bank from our curated network" },
+        { id: 3, text: "Prepare and organize all required documentation for you" },
+        { id: 4, text: "Submit and track your application until funds are credited" }
     ];
 
     return (
@@ -54,12 +54,12 @@ const FeaturesSection = () => {
                                 <div className="h-[3px] w-12 bg-primary"></div>
                             </div>
                             <h2 className="section-heading">
-                                Flexible and Quick Business <br /> Loans For You
+                                Simplify Your Business <br /> Loan Journey
                             </h2>
                         </div>
                         <div className="lg:w-1/2">
                             <p className="content-p">
-                                We specialize in providing institutional-grade capital to businesses and individuals. Our streamlined digital process ensures you get the funds you need when you need them most, without the traditional banking hurdles. We are here to support your growth.
+                                Aevicta works with Chennai's entrepreneurs, traders, manufacturers, and growing enterprises to connect them with the right business loan from the right financial institution. Our team understands the local market, the banks, and the paperwork, and we put all of that knowledge to work for you.
                             </p>
                         </div>
                     </motion.div>
@@ -126,25 +126,25 @@ const FeaturesSection = () => {
                             >
                                 <div className="space-y-6">
                                     <div className="flex items-center gap-3">
-                                        <span className="text-[14px] font-medium text-slate-400">Trusted Company</span>
+                                        <span className="text-[14px] font-medium text-slate-400">Our Banking Partners</span>
                                         <div className="h-[3px] w-10 bg-primary"></div>
                                     </div>
                                     <h2 className="section-heading">
-                                        Most of the People Trust <br /> on Us For Fast Services
+                                        Backed by India's Most <br /> Trusted Banks
                                     </h2>
                                 </div>
 
                                 <div className="flex flex-col md:flex-row gap-8">
                                     <div className="w-40 h-40 rounded-none overflow-hidden shrink-0 border-4 border-slate-50 shadow-2xl shadow-slate-200/50">
                                         <img 
-                                            src="https://images.unsplash.com/photo-1556742044-3c52d6e88c62?q=80&w=2070&auto=format&fit=crop" 
-                                            alt="Trust" 
+                                            src="https://images.unsplash.com/photo-1501167786227-4cba60f6d58f?q=80&w=2070&auto=format&fit=crop" 
+                                            alt="Banking" 
                                             className="w-full h-full object-cover"
                                         />
                                     </div>
                                     <div className="space-y-8">
                                         <p className="content-p">
-                                            There are many variations of passages of lorem ipsum available the majority have suffered alteration in some form by injected humour. Duis aute irure dolor ipsum is simply in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                                            We have established relationships with leading banks and NBFCs across India. When you work with Aevicta, you get access to a curated network of financial institutions that trust our process and prioritize our clients.
                                         </p>
                                         <div className="grid grid-cols-2 gap-y-5 gap-x-12">
                                             {trustServices.map((service, idx) => (

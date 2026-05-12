@@ -3,6 +3,7 @@ import Introduction from '../components/Introduction';
 import LoanServices from '../components/LoanServices';
 import FeaturesSection from '../components/FeaturesSection';
 import HowItWorks from '../components/HowItWorks';
+import BankPartners from '../components/BankPartners';
 import FaqSection from '../components/FaqSection';
 
 const HomePage = () => {
@@ -13,6 +14,7 @@ const HomePage = () => {
             <FeaturesSection />
             <LoanServices />
             <HowItWorks />
+            <BankPartners />
             <FaqSection />
         </div>
     );

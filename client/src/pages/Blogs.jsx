@@ -1,74 +1,79 @@
 import React, { useState, useEffect } from 'react';
 import { Calendar, User, ArrowRight, Search, MessageSquare, Tag, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 import { API_BASE_URL } from '../apiConfig';
 
 const Blogs = () => {
     const [blogs, setBlogs] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [expandedId, setExpandedId] = useState(null);
+
+    const toggleExpand = (id) => {
+        setExpandedId(expandedId === id ? null : id);
+    };
 
     const mockBlogs = [
         {
             id: 1,
-            title: "For Car auto you will get 90% loan amount",
-            excerpt: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vestibulum lorem sed risus [...]",
-            category: "Credit Card",
-            author: "admin",
-            createdAt: "2020-12-31",
-            comments: 0,
-            imageUrl: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=1000&auto=format&fit=crop"
+            title: "How to Get a Business Loan in Chennai: A Complete Step-by-Step Guide",
+            excerpt: "A practical walkthrough for Chennai business owners covering eligibility criteria, documents required, types of loans available, common mistakes to avoid, and how to improve your approval chances.",
+            content: "A practical walkthrough for Chennai business owners covering eligibility criteria, documents required, types of loans available, common mistakes to avoid, and how to improve your approval chances.",
+            category: "Business Loan",
+            author: "Aevicta Team",
+            createdAt: "2025-05-10"
         },
         {
             id: 2,
-            title: "How to get education loan for overseas",
-            excerpt: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vestibulum lorem sed risus [...]",
-            category: "Car Loan",
-            author: "admin",
-            createdAt: "2020-12-31",
-            comments: 0,
-            imageUrl: "https://images.unsplash.com/photo-1523240715632-610349ef5008?q=80&w=1000&auto=format&fit=crop"
+            title: "Working Capital Loan vs Term Loan: Which One Does Your Business Actually Need?",
+            excerpt: "A clear comparison with real-world examples relevant to Chennai businesses, helping owners choose the right loan type for their specific situation.",
+            content: "A clear comparison with real-world examples relevant to Chennai businesses, helping owners choose the right loan type for their specific situation.",
+            category: "Finance Tips",
+            author: "Aevicta Team",
+            createdAt: "2025-05-08"
         },
         {
             id: 3,
-            title: "Easy way to calculate interest on a loan",
-            excerpt: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vestibulum lorem sed risus [...]",
-            category: "Investment",
-            author: "admin",
-            createdAt: "2020-12-31",
-            comments: 0,
-            imageUrl: "https://images.unsplash.com/photo-1454165833767-027ffea9e77b?q=80&w=1000&auto=format&fit=crop"
+            title: "5 Reasons Business Loans Get Rejected in India (And How to Avoid Every Single One)",
+            excerpt: "A candid, helpful breakdown of why banks reject applications and what business owners can do right now to strengthen their financial profile before applying.",
+            content: "A candid, helpful breakdown of why banks reject applications and what business owners can do right now to strengthen their financial profile before applying.",
+            category: "Business Insights",
+            author: "Aevicta Team",
+            createdAt: "2025-05-05"
         },
         {
             id: 4,
-            title: "How find low interest rate for home loan",
-            excerpt: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vestibulum lorem sed risus [...]",
-            category: "Education",
-            author: "admin",
-            createdAt: "2020-12-31",
-            comments: 0,
-            imageUrl: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=1000&auto=format&fit=crop"
+            title: "MSME Loans in Chennai: Everything You Need to Know in 2025",
+            excerpt: "A comprehensive guide to MSME-specific loan products available through banks in Chennai, covering eligibility, documentation, timelines, and how to apply.",
+            content: "A comprehensive guide to MSME-specific loan products available through banks in Chennai, covering eligibility, documentation, timelines, and how to apply.",
+            category: "MSME",
+            author: "Aevicta Team",
+            createdAt: "2025-05-02"
+        },
+        {
+            id: 5,
+            title: "How to Improve Your Business CIBIL Score Before Applying for a Loan",
+            excerpt: "Actionable steps for Chennai entrepreneurs to strengthen their credit profile and significantly increase their chances of loan approval.",
+            content: "Actionable steps for Chennai entrepreneurs to strengthen their credit profile and significantly increase their chances of loan approval.",
+            category: "Credit Score",
+            author: "Aevicta Team",
+            createdAt: "2025-04-28"
+        },
+        {
+            id: 6,
+            title: "Why Chennai Businesses Are Getting Better Loan Results With Expert Assistance",
+            excerpt: "An honest look at the advantages of having expert support during the loan process, what it saves in time, money, and stress compared to going it alone.",
+            content: "An honest look at the advantages of having expert support during the loan process, what it saves in time, money, and stress compared to going it alone.",
+            category: "Success Stories",
+            author: "Aevicta Team",
+            createdAt: "2025-04-25"
         }
     ];
 
     useEffect(() => {
-        setLoading(true);
-        fetch(`${API_BASE_URL}/blogs`)
-            .then(res => res.json())
-            .then(data => {
-                if (data && data.length > 0) {
-                    setBlogs(data);
-                } else {
-                    setBlogs(mockBlogs);
-                }
-                setLoading(false);
-            })
-            .catch(err => {
-                console.error("Failed to fetch blogs:", err);
-                setBlogs(mockBlogs);
-                setLoading(false);
-            });
+        setBlogs(mockBlogs);
+        setLoading(false);
     }, []);
 
     return (
@@ -90,11 +95,11 @@ const Blogs = () => {
             <section className="py-24">
                 <div className="max-w-[1400px] mx-auto px-6 lg:px-8">
                     <div className="grid lg:grid-cols-12 gap-12">
-                        
+
                         {/* Blogs Column (75%) */}
                         <div className="lg:col-span-8 space-y-12">
                             {blogs.map((blog, index) => (
-                                <motion.article 
+                                <motion.article
                                     key={blog.id}
                                     initial={{ opacity: 0, y: 30 }}
                                     whileInView={{ opacity: 1, y: 0 }}
@@ -102,19 +107,12 @@ const Blogs = () => {
                                     viewport={{ once: true }}
                                     className="bg-white shadow-sm border border-slate-100 overflow-hidden group"
                                 >
-                                    <div className="relative h-[450px] overflow-hidden">
-                                        <img 
-                                            src={blog.imageUrl} 
-                                            alt={blog.title} 
-                                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
-                                        />
-                                        <div className="absolute top-6 left-6 bg-primary text-white px-4 py-2 text-[13px] font-black uppercase tracking-widest shadow-lg">
-                                            {new Date(blog.createdAt).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })}
-                                        </div>
-                                    </div>
-
                                     <div className="p-10 space-y-6">
-                                        <div className="flex items-center gap-6 text-[13px] text-slate-400 font-bold uppercase tracking-widest">
+                                        <div className="flex flex-wrap items-center gap-6 text-[13px] text-slate-400 font-bold uppercase tracking-widest">
+                                            <div className="flex items-center gap-2">
+                                                <Calendar size={14} className="text-primary" />
+                                                <span>{new Date(blog.createdAt).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })}</span>
+                                            </div>
                                             <div className="flex items-center gap-2">
                                                 <User size={14} className="text-primary" />
                                                 <span>{blog.author}</span>
@@ -125,50 +123,54 @@ const Blogs = () => {
                                             </div>
                                         </div>
 
-                                        <h2 className="text-3xl font-black text-[#001a33] hover:text-primary transition-colors leading-tight">
-                                            <Link to={`/blog/${blog.id}`}>{blog.title}</Link>
+                                        <h2 className="text-3xl font-black text-[#001a33] hover:text-primary transition-colors leading-tight cursor-pointer" onClick={() => toggleExpand(blog.id)}>
+                                            {blog.title}
                                         </h2>
 
                                         <p className="text-slate-500 leading-relaxed text-[15px]">
                                             {blog.excerpt}
                                         </p>
 
+                                        <AnimatePresence>
+                                            {expandedId === blog.id && (
+                                                <motion.div
+                                                    initial={{ height: 0, opacity: 0 }}
+                                                    animate={{ height: 'auto', opacity: 1 }}
+                                                    exit={{ height: 0, opacity: 0 }}
+                                                    className="overflow-hidden"
+                                                >
+                                                    <p className="pt-6 text-slate-600 leading-relaxed text-[15px] border-t border-slate-50">
+                                                        {blog.content}
+                                                    </p>
+                                                </motion.div>
+                                            )}
+                                        </AnimatePresence>
+
                                         <div className="pt-6 flex items-center justify-between border-t border-slate-50">
-                                            <Link 
-                                                to={`/blog/${blog.id}`} 
+                                            <button
+                                                onClick={() => toggleExpand(blog.id)}
                                                 className="flex items-center gap-2 text-slate-900 font-black uppercase text-[13px] tracking-widest group/btn"
                                             >
-                                                <ArrowRight size={16} className="text-primary group-hover/btn:translate-x-1 transition-transform" />
-                                                <span>Read More</span>
-                                            </Link>
-                                            <div className="flex items-center gap-2 text-slate-400 text-[13px] font-bold">
-                                                <MessageSquare size={14} />
-                                                <span>{blog.comments} Comments</span>
-                                            </div>
+                                                <ArrowRight size={16} className={`text-primary transition-transform ${expandedId === blog.id ? 'rotate-90' : 'group-hover/btn:translate-x-1'}`} />
+                                                <span>{expandedId === blog.id ? 'Show Less' : 'Read More'}</span>
+                                            </button>
                                         </div>
                                     </div>
                                 </motion.article>
                             ))}
 
-                            {/* Pagination */}
-                            <div className="flex justify-center items-center gap-3 pt-8">
-                                <button className="w-10 h-10 bg-primary text-white font-black rounded-full flex items-center justify-center">1</button>
-                                <button className="w-10 h-10 bg-white text-slate-400 font-black rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition-all shadow-sm">2</button>
-                                <button className="w-10 h-10 bg-white text-slate-400 font-black rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition-all shadow-sm">
-                                    <ChevronRight size={18} />
-                                </button>
-                            </div>
+
                         </div>
 
                         {/* Sidebar Column (25%) */}
                         <aside className="lg:col-span-4 space-y-10">
-                            
+
                             {/* Search */}
                             <div className="bg-white p-8 border border-slate-100 shadow-sm">
                                 <div className="flex">
-                                    <input 
-                                        type="text" 
-                                        placeholder="Search" 
+                                    <input
+                                        type="text"
+                                        placeholder="Search"
                                         className="flex-1 bg-slate-50 border-r-0 border-slate-100 px-4 py-3 text-sm focus:outline-none"
                                     />
                                     <button className="bg-primary text-white p-3 hover:bg-slate-900 transition-colors">
@@ -181,20 +183,19 @@ const Blogs = () => {
                             <div className="bg-white p-8 border border-slate-100 shadow-sm space-y-6">
                                 <h4 className="text-lg font-black text-[#001a33] border-b border-slate-100 pb-4">Categories</h4>
                                 <ul className="space-y-4">
-                                    {[
-                                        { name: 'Business', count: 1 },
-                                        { name: 'Car Loan', count: 1 },
-                                        { name: 'Credit Card', count: 1 },
-                                        { name: 'Education', count: 2 },
-                                        { name: 'Investment', count: 1 }
-                                    ].map((cat) => (
-                                        <li key={cat.name}>
+                                    {Object.entries(
+                                        blogs.reduce((acc, b) => {
+                                            acc[b.category] = (acc[b.category] || 0) + 1;
+                                            return acc;
+                                        }, {})
+                                    ).map(([name, count]) => (
+                                        <li key={name}>
                                             <a href="#" className="flex items-center justify-between text-[14px] font-bold text-slate-500 hover:text-primary transition-colors group">
                                                 <div className="flex items-center gap-2">
                                                     <ArrowRight size={14} className="opacity-0 group-hover:opacity-100 transition-opacity" />
-                                                    <span>{cat.name}</span>
+                                                    <span>{name}</span>
                                                 </div>
-                                                <span className="text-slate-300 font-medium">({cat.count})</span>
+                                                <span className="text-slate-300 font-medium">({count})</span>
                                             </a>
                                         </li>
                                     ))}
@@ -205,10 +206,10 @@ const Blogs = () => {
                             <div className="bg-white p-8 border border-slate-100 shadow-sm space-y-6">
                                 <h4 className="text-lg font-black text-[#001a33] border-b border-slate-100 pb-4">Tags</h4>
                                 <div className="flex flex-wrap gap-2 pt-2">
-                                    {['bank', 'business', 'check', 'company', 'doc', 'house loan', 'it loan', 'loan', 'New', 'video'].map((tag) => (
-                                        <a 
-                                            key={tag} 
-                                            href="#" 
+                                    {Array.from(new Set(blogs.map(b => b.category.toLowerCase()))).map((tag) => (
+                                        <a
+                                            key={tag}
+                                            href="#"
                                             className="px-4 py-2 bg-slate-50 text-[12px] font-bold text-slate-500 hover:bg-primary hover:text-white transition-all uppercase tracking-wider"
                                         >
                                             {tag}

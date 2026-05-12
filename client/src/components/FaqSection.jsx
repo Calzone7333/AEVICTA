@@ -43,28 +43,28 @@ const FaqSection = () => {
 
     const faqs = [
         {
-            question: "What is an institutional property auction?",
-            answer: "It is a process where banks and financial institutions auction assets (residential or commercial) to recover dues. These are typically verified assets offered at competitive prices, providing a transparent way to buy high-value properties."
+            question: "What documents are required for a business loan in Chennai?",
+            answer: "Typically, you'll need business registration proof (GST/Trade License), last 6-12 months bank statements, KYC of directors/partners, and audited financials (for larger amounts). We help you organize all of these correctly."
         },
         {
-            question: "How do I register for an auction?",
-            answer: "You can register by creating an account on our platform, submitting your KYC documents (PAN, Aadhaar), and paying the Earnest Money Deposit (EMD) for the specific property you are interested in."
+            question: "How long does the loan approval process take?",
+            answer: "While it varies by bank, we strive for fast-track approvals. Most working capital and term loans are approved within 7-14 business days once all documentation is submitted correctly."
         },
         {
-            question: "Are the properties listed here verified?",
-            answer: "Yes, all properties listed on our platform undergo a primary legal and physical verification process by the respective banks and our institutional team to ensure authenticity and clear titles."
+            question: "Do I need collateral for a business loan?",
+            answer: "Not necessarily. We specialize in both secured (with collateral like property) and unsecured business loans. MSME schemes often provide funding without collateral for eligible businesses."
         },
         {
-            question: "Can I visit the property before bidding?",
-            answer: "Absolutely. Each listing includes specific inspection dates and contact details. You can schedule a visit to inspect the physical condition and surrounding locality of the asset before placing your bid."
+            question: "Can I get a loan if my business is a startup?",
+            answer: "Yes. While harder than established firms, we have specific expertise in startup business funding. We help you present a strong business plan and financial projections to the right lenders."
         },
         {
-            question: "What happens after I win an auction?",
-            answer: "Once you are the successful bidder, you will receive a Sale Confirmation. You then need to pay the remaining balance within the specified timeline (usually 15-30 days) to receive the official Sale Certificate."
+            question: "What is the typical interest rate for business loans?",
+            answer: "Rates vary based on the bank, loan type, and your business profile. They generally range from 9% to 18%. Our role is to negotiate the most competitive rate available for you."
         },
         {
-            question: "Is my EMD refundable if I don't win?",
-            answer: "Yes, if you are not the successful bidder, the Earnest Money Deposit (EMD) is fully refunded to your registered bank account within the stipulated time frame mentioned in the auction terms."
+            question: "Why should I use Aevicta instead of going directly to a bank?",
+            answer: "We save you time and stress. We know which banks are currently favoring your industry, we handle the paperwork, and we ensure your application is structured for maximum approval chance, which often leads to better terms."
         }
     ];
 

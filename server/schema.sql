@@ -1,0 +1,37 @@
+CREATE TABLE IF NOT EXISTS users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(255) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS loan_applications (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    full_name VARCHAR(255) NOT NULL,
+    business_name VARCHAR(255),
+    phone VARCHAR(20) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    loan_type VARCHAR(100),
+    amount VARCHAR(100),
+    message TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS contact_messages (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    phone VARCHAR(20),
+    service VARCHAR(100),
+    message TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS visitor_logs (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    ip VARCHAR(50),
+    page_url VARCHAR(255),
+    browser VARCHAR(100),
+    os VARCHAR(100),
+    device VARCHAR(100),
+    visited_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

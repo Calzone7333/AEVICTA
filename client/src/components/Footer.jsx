@@ -1,4 +1,4 @@
-import { Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin } from 'lucide-react';
+import { Facebook, Twitter, Instagram, Mail, Phone, MapPin } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Footer = () => {
@@ -15,10 +15,10 @@ const Footer = () => {
                             </div>
                         </Link>
                         <p className="text-slate-400 text-[15px] leading-relaxed">
-                            Aevicta Finance provides simple and secure loan solutions to help you achieve your dreams. Trusted by thousands for institutional-grade financial services.
+                            Aevicta is a Chennai-based business loan assistance firm. Our entire focus is on helping Chennai's businesses get the funding they need, without the stress and confusion.
                         </p>
                         <div className="flex items-center gap-3">
-                            {[Facebook, Twitter, Linkedin, Instagram].map((Icon, idx) => (
+                            {[Facebook, Instagram].map((Icon, idx) => (
                                 <a key={idx} href="#" className="w-10 h-10 rounded bg-white/5 flex items-center justify-center text-slate-400 hover:bg-primary hover:text-white transition-all">
                                     <Icon size={18} />
                                 </a>
@@ -38,8 +38,8 @@ const Footer = () => {
                                 { name: 'FAQs', path: '/faq' }
                             ].map(item => (
                                 <li key={item.name}>
-                                    <Link to={item.path} className="text-slate-400 hover:text-green-500 transition-colors flex items-center gap-2">
-                                        <div className="w-1.5 h-[1.5px] bg-green-500"></div>
+                                    <Link to={item.path} className="text-slate-400 hover:text-primary transition-colors flex items-center gap-2">
+                                        <div className="w-1.5 h-[1.5px] bg-primary"></div>
                                         {item.name}
                                     </Link>
                                 </li>
@@ -51,12 +51,12 @@ const Footer = () => {
                     <div className="space-y-8">
                         <h4 className="text-lg font-black uppercase tracking-tight">Our Services</h4>
                         <ul className="space-y-4">
-                            {['Car Loan', 'Wedding Loan', 'Property Loan', 'Education Loan', 'Business Loan'].map(item => (
+                            {['Business Term Loans', 'Working Capital Loans', 'MSME and SME Loans', 'Startup Business Funding', 'Loan Against Property'].map(item => (
                                 <li key={item}>
-                                    <a href="#" className="text-slate-400 hover:text-green-500 transition-colors flex items-center gap-2">
-                                        <div className="w-1.5 h-[1.5px] bg-green-500"></div>
+                                    <Link to="/service" className="text-slate-400 hover:text-primary transition-colors flex items-center gap-2">
+                                        <div className="w-1.5 h-[1.5px] bg-primary"></div>
                                         {item}
-                                    </a>
+                                    </Link>
                                 </li>
                             ))}
                         </ul>
@@ -66,24 +66,24 @@ const Footer = () => {
                     <div className="space-y-8">
                         <h4 className="text-lg font-black uppercase tracking-tight">Contact Us</h4>
                         <div className="space-y-6">
-                            <div className="flex items-start gap-4">
-                                <div className="w-10 h-10 rounded bg-green-500/10 flex items-center justify-center text-green-500 shrink-0">
+                            <a href="mailto:info@aevicta.com" className="flex items-start gap-4 group/item">
+                                <div className="w-10 h-10 rounded bg-primary/10 flex items-center justify-center text-primary shrink-0 group-hover/item:bg-primary group-hover/item:text-white transition-all">
                                     <Mail size={18} />
                                 </div>
                                 <div className="flex flex-col">
                                     <span className="text-[11px] font-bold text-slate-500 uppercase tracking-widest">Email Us</span>
-                                    <span className="text-white font-bold">needhelp@company.com</span>
+                                    <span className="text-white font-bold">info@aevicta.com</span>
                                 </div>
-                            </div>
-                            <div className="flex items-start gap-4">
-                                <div className="w-10 h-10 rounded bg-green-500/10 flex items-center justify-center text-green-500 shrink-0">
+                            </a>
+                            <a href="tel:+919943048554" className="flex items-start gap-4 group/item">
+                                <div className="w-10 h-10 rounded bg-primary/10 flex items-center justify-center text-primary shrink-0 group-hover/item:bg-primary group-hover/item:text-white transition-all">
                                     <Phone size={18} />
                                 </div>
                                 <div className="flex flex-col">
                                     <span className="text-[11px] font-bold text-slate-500 uppercase tracking-widest">Call Anytime</span>
-                                    <span className="text-white font-bold">+91 9812310000</span>
+                                    <span className="text-white font-bold">+91 9943048554</span>
                                 </div>
-                            </div>
+                            </a>
                         </div>
                     </div>
 

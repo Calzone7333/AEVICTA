@@ -1,22 +1,9 @@
-// Detect if we are on a production domain
-const isProduction = window.location.hostname.includes('Aevicta.com');
+// API Configuration
+// This will automatically switch between localhost and your production domain
+const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
 
-// Define where the backend is located
-const backendPort = '8083';
+export const API_BASE_URL = isLocal 
+    ? 'http://localhost:5000/api' 
+    : 'https://www.aevicta.com/api'; // Your production API endpoint
 
-// Base URL of the backend server
-export const BASE_URL = isProduction
-    ? `https://${window.location.hostname}`
-    : `http://${window.location.hostname}:${backendPort}`;
-
-// API Base URL
-export const API_BASE_URL = `${BASE_URL}/api`;
-
-// Helper for file URLs
-export const getFileUrl = (path) => {
-    if (!path) return null;
-    if (path.startsWith('http')) return path;
-    const cleanPath = path.replace(/^\/+/, ''); // Remove all leading slashes
-    return `${BASE_URL.replace(/\/+$/, '')}/${cleanPath}`;
-};
-
+// Note: Ensure your backend server is also configured to handle requests from this domain.

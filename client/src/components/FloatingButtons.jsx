@@ -27,7 +27,7 @@ const FloatingButtons = () => {
 
   const openWhatsApp = () => {
     // Replace with your actual WhatsApp number
-    const phoneNumber = "919000000000"; 
+    const phoneNumber = "919943048554"; 
     window.open(`https://wa.me/${phoneNumber}`, '_blank');
   };
 

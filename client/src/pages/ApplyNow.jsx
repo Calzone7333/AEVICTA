@@ -1,12 +1,86 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { ChevronDown, Send } from 'lucide-react';
+import { ChevronDown, Send, CheckCircle2 } from 'lucide-react';
+import { API_BASE_URL } from '../apiConfig';
 
 const ApplyNow = () => {
+    const [formData, setFormData] = useState({
+        amount: '',
+        monthlyIncome: '',
+        purpose: 'Business',
+        tenure: '12 Months',
+        fullName: '',
+        email: '',
+        phone: '',
+        maritalStatus: 'Single',
+        birthDate: '',
+        dependents: '0 Dependents',
+        houseNo: '',
+        street: '',
+        city: '',
+        state: '',
+        country: 'India',
+        pinCode: '',
+        industry: '',
+        employerName: '',
+        employmentStatus: 'Full Time Employed',
+        employmentLength: '',
+        workPhone: ''
+    });
+
+    const [status, setStatus] = useState({ type: '', message: '' });
+    const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        // Log visit
+        fetch(`${API_BASE_URL}/analytics/log`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ pageUrl: window.location.pathname })
+        }).catch(err => console.error('Analytics error:', err));
+    }, []);
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setLoading(true);
+        setStatus({ type: '', message: '' });
+
+        try {
+            // Mapping frontend names to backend names if needed, 
+            // but let's just send the whole object or a consolidated message.
+            const applicationData = {
+                fullName: formData.fullName,
+                businessName: formData.employerName, // Using employer name as business name placeholder
+                phone: formData.phone,
+                email: formData.email,
+                loanType: formData.purpose,
+                amount: formData.amount,
+                message: `Income: ${formData.monthlyIncome}, Tenure: ${formData.tenure}, Address: ${formData.houseNo}, ${formData.street}, ${formData.city}, ${formData.state}. Employment: ${formData.employmentStatus} at ${formData.employerName} (${formData.industry}) for ${formData.employmentLength}.`
+            };
+
+            const response = await fetch(`${API_BASE_URL}/forms/loan`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(applicationData)
+            });
+
+            if (response.ok) {
+                setStatus({ type: 'success', message: 'Application submitted successfully! We will contact you after reviewing your details.' });
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+                throw new Error('Submission failed');
+            }
+        } catch (err) {
+            setStatus({ type: 'error', message: 'Failed to submit application. Please check your details and try again.' });
+        } finally {
+            setLoading(false);
+        }
+    };
+
     return (
-        <div className="bg-white min-h-screen font-sans text-slate-900 selection:bg-[#00A3E0]/10 antialiased">
-            {/* 1. Breadcrumb Hero Section */}
-            <section className="bg-[#001a33] pt-40 pb-24 relative overflow-hidden">
+        <div className="bg-white min-h-screen font-sans text-slate-900 selection:bg-primary/10 antialiased">
+            {/* 1. Hero Section */}
+            <section className="bg-navy pt-40 pb-24 relative overflow-hidden">
                 <div className="max-w-[1400px] mx-auto px-6 lg:px-8 relative z-10">
                     <div className="flex items-center gap-2 mb-6 text-[11px] font-bold uppercase tracking-widest">
                         <span className="bg-white/10 text-white px-3 py-1 rounded-sm">Home</span>
@@ -15,38 +89,47 @@ const ApplyNow = () => {
                     </div>
                     <h1 className="text-5xl lg:text-7xl font-black text-white font-display tracking-tight">Apply Now</h1>
                 </div>
-                {/* Decorative Pattern Overlay */}
                 <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]"></div>
             </section>
 
-            {/* 2. Multi-Section Form */}
+            {/* 2. Form Section */}
             <section className="py-24">
                 <div className="max-w-[1200px] mx-auto px-6 lg:px-8">
-                    <form className="space-y-20">
-                        
+                    {status.message && (
+                        <motion.div 
+                            initial={{ opacity: 0, y: -20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            className={`mb-12 p-6 rounded-none border-l-4 font-black uppercase tracking-widest text-sm flex items-center gap-4 ${status.type === 'success' ? 'bg-green-50 border-green-500 text-green-700' : 'bg-red-50 border-red-500 text-red-700'}`}
+                        >
+                            {status.type === 'success' ? <CheckCircle2 size={24} /> : null}
+                            {status.message}
+                        </motion.div>
+                    )}
+
+                    <form onSubmit={handleSubmit} className="space-y-20">
                         {/* Section 1: Loan Details */}
                         <div className="space-y-8">
                             <div className="space-y-4">
                                 <div className="flex items-center gap-3">
-                                    <span className="text-[12px] font-black uppercase tracking-[0.2em] text-[#00A3E0]">Calculate your loan amount</span>
-                                    <div className="h-[2px] w-12 bg-[#00A3E0]"></div>
+                                    <span className="text-[12px] font-black uppercase tracking-[0.2em] text-primary">Calculate your loan</span>
+                                    <div className="h-[2px] w-12 bg-primary"></div>
                                 </div>
-                                <h2 className="text-3xl font-black text-[#001a33]">Loan Details</h2>
+                                <h2 className="text-3xl font-black text-navy">Loan Details</h2>
                             </div>
                             
                             <div className="grid md:grid-cols-2 gap-8">
                                 <div className="space-y-2">
                                     <label className="text-[13px] font-bold text-slate-700 uppercase tracking-widest">Loan Amount*</label>
-                                    <input type="text" placeholder="Loan Amount" className="w-full px-6 py-4 bg-[#f4f7fa] border border-transparent focus:border-[#00A3E0] outline-none rounded-sm transition-all text-slate-700" />
+                                    <input required type="text" placeholder="Loan Amount" value={formData.amount} onChange={(e) => setFormData({...formData, amount: e.target.value})} className="w-full px-6 py-4 bg-slate-50 border border-transparent focus:border-primary outline-none rounded-none transition-all text-slate-700 font-bold" />
                                 </div>
                                 <div className="space-y-2">
                                     <label className="text-[13px] font-bold text-slate-700 uppercase tracking-widest">Monthly Income*</label>
-                                    <input type="text" placeholder="Monthly Income" className="w-full px-6 py-4 bg-[#f4f7fa] border border-transparent focus:border-[#00A3E0] outline-none rounded-sm transition-all text-slate-700" />
+                                    <input required type="text" placeholder="Monthly Income" value={formData.monthlyIncome} onChange={(e) => setFormData({...formData, monthlyIncome: e.target.value})} className="w-full px-6 py-4 bg-slate-50 border border-transparent focus:border-primary outline-none rounded-none transition-all text-slate-700 font-bold" />
                                 </div>
                                 <div className="space-y-2">
                                     <label className="text-[13px] font-bold text-slate-700 uppercase tracking-widest">Purpose of Loan*</label>
                                     <div className="relative">
-                                        <select className="w-full px-6 py-4 bg-[#f4f7fa] border border-transparent focus:border-[#00A3E0] outline-none rounded-sm transition-all text-slate-700 appearance-none cursor-pointer">
+                                        <select value={formData.purpose} onChange={(e) => setFormData({...formData, purpose: e.target.value})} className="w-full px-6 py-4 bg-slate-50 border border-transparent focus:border-primary outline-none rounded-none transition-all text-slate-700 font-bold appearance-none cursor-pointer">
                                             <option>Business</option>
                                             <option>Personal</option>
                                             <option>Education</option>
@@ -56,9 +139,9 @@ const ApplyNow = () => {
                                     </div>
                                 </div>
                                 <div className="space-y-2">
-                                    <label className="text-[13px] font-bold text-slate-700 uppercase tracking-widest">Loan Years*</label>
+                                    <label className="text-[13px] font-bold text-slate-700 uppercase tracking-widest">Loan Tenure*</label>
                                     <div className="relative">
-                                        <select className="w-full px-6 py-4 bg-[#f4f7fa] border border-transparent focus:border-[#00A3E0] outline-none rounded-sm transition-all text-slate-700 appearance-none cursor-pointer">
+                                        <select value={formData.tenure} onChange={(e) => setFormData({...formData, tenure: e.target.value})} className="w-full px-6 py-4 bg-slate-50 border border-transparent focus:border-primary outline-none rounded-none transition-all text-slate-700 font-bold appearance-none cursor-pointer">
                                             <option>6 Months</option>
                                             <option>12 Months</option>
                                             <option>24 Months</option>
@@ -74,29 +157,29 @@ const ApplyNow = () => {
                         <div className="space-y-8">
                             <div className="space-y-4">
                                 <div className="flex items-center gap-3">
-                                    <span className="text-[12px] font-black uppercase tracking-[0.2em] text-[#00A3E0]">Ask for more details</span>
-                                    <div className="h-[2px] w-12 bg-[#00A3E0]"></div>
+                                    <span className="text-[12px] font-black uppercase tracking-[0.2em] text-primary">Identity Info</span>
+                                    <div className="h-[2px] w-12 bg-primary"></div>
                                 </div>
-                                <h2 className="text-3xl font-black text-[#001a33]">Personal Details</h2>
+                                <h2 className="text-3xl font-black text-navy">Personal Details</h2>
                             </div>
                             
                             <div className="grid md:grid-cols-2 gap-8">
                                 <div className="space-y-2">
                                     <label className="text-[13px] font-bold text-slate-700 uppercase tracking-widest">Full Name (as per taxpayer ID)</label>
-                                    <input type="text" placeholder="Full Name" className="w-full px-6 py-4 bg-[#f4f7fa] border border-transparent focus:border-[#00A3E0] outline-none rounded-sm transition-all text-slate-700" />
+                                    <input required type="text" placeholder="Full Name" value={formData.fullName} onChange={(e) => setFormData({...formData, fullName: e.target.value})} className="w-full px-6 py-4 bg-slate-50 border border-transparent focus:border-primary outline-none rounded-none transition-all text-slate-700 font-bold" />
                                 </div>
                                 <div className="space-y-2">
                                     <label className="text-[13px] font-bold text-slate-700 uppercase tracking-widest">Email*</label>
-                                    <input type="email" placeholder="Your Email" className="w-full px-6 py-4 bg-[#f4f7fa] border border-transparent focus:border-[#00A3E0] outline-none rounded-sm transition-all text-slate-700" />
+                                    <input required type="email" placeholder="Your Email" value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} className="w-full px-6 py-4 bg-slate-50 border border-transparent focus:border-primary outline-none rounded-none transition-all text-slate-700 font-bold" />
                                 </div>
                                 <div className="space-y-2">
                                     <label className="text-[13px] font-bold text-slate-700 uppercase tracking-widest">Mobile Number*</label>
-                                    <input type="text" placeholder="Mobile Number" className="w-full px-6 py-4 bg-[#f4f7fa] border border-transparent focus:border-[#00A3E0] outline-none rounded-sm transition-all text-slate-700" />
+                                    <input required type="text" placeholder="Mobile Number" value={formData.phone} onChange={(e) => setFormData({...formData, phone: e.target.value})} className="w-full px-6 py-4 bg-slate-50 border border-transparent focus:border-primary outline-none rounded-none transition-all text-slate-700 font-bold" />
                                 </div>
                                 <div className="space-y-2">
                                     <label className="text-[13px] font-bold text-slate-700 uppercase tracking-widest">Marital Status*</label>
                                     <div className="relative">
-                                        <select className="w-full px-6 py-4 bg-[#f4f7fa] border border-transparent focus:border-[#00A3E0] outline-none rounded-sm transition-all text-slate-700 appearance-none cursor-pointer">
+                                        <select value={formData.maritalStatus} onChange={(e) => setFormData({...formData, maritalStatus: e.target.value})} className="w-full px-6 py-4 bg-slate-50 border border-transparent focus:border-primary outline-none rounded-none transition-all text-slate-700 font-bold appearance-none cursor-pointer">
                                             <option>Single</option>
                                             <option>Married</option>
                                             <option>Divorced</option>
@@ -104,114 +187,19 @@ const ApplyNow = () => {
                                         <ChevronDown size={18} className="absolute right-6 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
                                     </div>
                                 </div>
-                                <div className="space-y-2">
-                                    <label className="text-[13px] font-bold text-slate-700 uppercase tracking-widest">Birth Date* (as per taxpayer ID)</label>
-                                    <input type="date" className="w-full px-6 py-4 bg-[#f4f7fa] border border-transparent focus:border-[#00A3E0] outline-none rounded-sm transition-all text-slate-700" />
-                                </div>
-                                <div className="space-y-2">
-                                    <label className="text-[13px] font-bold text-slate-700 uppercase tracking-widest">Number Of Dependents*</label>
-                                    <div className="relative">
-                                        <select className="w-full px-6 py-4 bg-[#f4f7fa] border border-transparent focus:border-[#00A3E0] outline-none rounded-sm transition-all text-slate-700 appearance-none cursor-pointer">
-                                            <option>0 Dependents</option>
-                                            <option>1 Dependent</option>
-                                            <option>2 Dependents</option>
-                                            <option>3+ Dependents</option>
-                                        </select>
-                                        <ChevronDown size={18} className="absolute right-6 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
-                                    </div>
-                                </div>
                             </div>
                         </div>
 
-                        {/* Section 3: Address Details */}
-                        <div className="space-y-8">
-                            <div className="space-y-4">
-                                <div className="flex items-center gap-3">
-                                    <span className="text-[12px] font-black uppercase tracking-[0.2em] text-[#00A3E0]">Street, City And State</span>
-                                    <div className="h-[2px] w-12 bg-[#00A3E0]"></div>
-                                </div>
-                                <h2 className="text-3xl font-black text-[#001a33]">Address Details</h2>
-                            </div>
-                            
-                            <div className="grid md:grid-cols-3 gap-8">
-                                <div className="space-y-2">
-                                    <label className="text-[13px] font-bold text-slate-700 uppercase tracking-widest">House No/Name*</label>
-                                    <input type="text" placeholder="House Number/Name" className="w-full px-6 py-4 bg-[#f4f7fa] border border-transparent focus:border-[#00A3E0] outline-none rounded-sm transition-all text-slate-700" />
-                                </div>
-                                <div className="space-y-2">
-                                    <label className="text-[13px] font-bold text-slate-700 uppercase tracking-widest">Street*</label>
-                                    <input type="text" placeholder="Street" className="w-full px-6 py-4 bg-[#f4f7fa] border border-transparent focus:border-[#00A3E0] outline-none rounded-sm transition-all text-slate-700" />
-                                </div>
-                                <div className="space-y-2">
-                                    <label className="text-[13px] font-bold text-slate-700 uppercase tracking-widest">City*</label>
-                                    <input type="text" placeholder="City" className="w-full px-6 py-4 bg-[#f4f7fa] border border-transparent focus:border-[#00A3E0] outline-none rounded-sm transition-all text-slate-700" />
-                                </div>
-                                <div className="space-y-2">
-                                    <label className="text-[13px] font-bold text-slate-700 uppercase tracking-widest">State*</label>
-                                    <input type="text" placeholder="State" className="w-full px-6 py-4 bg-[#f4f7fa] border border-transparent focus:border-[#00A3E0] outline-none rounded-sm transition-all text-slate-700" />
-                                </div>
-                                <div className="space-y-2">
-                                    <label className="text-[13px] font-bold text-slate-700 uppercase tracking-widest">Country*</label>
-                                    <input type="text" placeholder="Country" className="w-full px-6 py-4 bg-[#f4f7fa] border border-transparent focus:border-[#00A3E0] outline-none rounded-sm transition-all text-slate-700" />
-                                </div>
-                                <div className="space-y-2">
-                                    <label className="text-[13px] font-bold text-slate-700 uppercase tracking-widest">Pin Code*</label>
-                                    <input type="text" placeholder="Pin Code" className="w-full px-6 py-4 bg-[#f4f7fa] border border-transparent focus:border-[#00A3E0] outline-none rounded-sm transition-all text-slate-700" />
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Section 4: Other Details */}
-                        <div className="space-y-8">
-                            <div className="space-y-4">
-                                <div className="flex items-center gap-3">
-                                    <span className="text-[12px] font-black uppercase tracking-[0.2em] text-[#00A3E0]">Employment and other stuff</span>
-                                    <div className="h-[2px] w-12 bg-[#00A3E0]"></div>
-                                </div>
-                                <h2 className="text-3xl font-black text-[#001a33]">Other Details</h2>
-                            </div>
-                            
-                            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                                <div className="space-y-2 md:col-span-2 lg:col-span-1">
-                                    <label className="text-[13px] font-bold text-slate-700 uppercase tracking-widest">Employment Industry*</label>
-                                    <input type="text" placeholder="Employment Industry" className="w-full px-6 py-4 bg-[#f4f7fa] border border-transparent focus:border-[#00A3E0] outline-none rounded-sm transition-all text-slate-700" />
-                                </div>
-                                <div className="space-y-2 md:col-span-2 lg:col-span-2">
-                                    <label className="text-[13px] font-bold text-slate-700 uppercase tracking-widest">Employer Name*</label>
-                                    <input type="text" placeholder="Employer Name" className="w-full px-6 py-4 bg-[#f4f7fa] border border-transparent focus:border-[#00A3E0] outline-none rounded-sm transition-all text-slate-700" />
-                                </div>
-                                <div className="space-y-2">
-                                    <label className="text-[13px] font-bold text-slate-700 uppercase tracking-widest">Employer Status*</label>
-                                    <div className="relative">
-                                        <select className="w-full px-6 py-4 bg-[#f4f7fa] border border-transparent focus:border-[#00A3E0] outline-none rounded-sm transition-all text-slate-700 appearance-none cursor-pointer">
-                                            <option>Full Time Employed</option>
-                                            <option>Part Time Employed</option>
-                                            <option>Self Employed</option>
-                                            <option>Unemployed</option>
-                                        </select>
-                                        <ChevronDown size={18} className="absolute right-6 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
-                                    </div>
-                                </div>
-                                <div className="space-y-2">
-                                    <label className="text-[13px] font-bold text-slate-700 uppercase tracking-widest">Length of Employment*</label>
-                                    <input type="text" placeholder="Length of Employment" className="w-full px-6 py-4 bg-[#f4f7fa] border border-transparent focus:border-[#00A3E0] outline-none rounded-sm transition-all text-slate-700" />
-                                </div>
-                                <div className="space-y-2">
-                                    <label className="text-[13px] font-bold text-slate-700 uppercase tracking-widest">Work Phone Number*</label>
-                                    <input type="text" placeholder="Work Phone Number" className="w-full px-6 py-4 bg-[#f4f7fa] border border-transparent focus:border-[#00A3E0] outline-none rounded-sm transition-all text-slate-700" />
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Submit Button */}
+                        {/* Submit */}
                         <div className="pt-10 border-t border-slate-100">
                             <motion.button 
                                 whileHover={{ scale: 1.02 }}
                                 whileTap={{ scale: 0.98 }}
                                 type="submit"
-                                className="bg-[#00A3E0] text-white px-12 py-5 font-black uppercase tracking-widest text-[14px] shadow-xl shadow-[#00A3E0]/20"
+                                disabled={loading}
+                                className={`bg-primary text-white px-12 py-5 font-black uppercase tracking-widest text-[14px] shadow-xl shadow-primary/20 flex items-center gap-4 ${loading ? 'opacity-70 cursor-not-allowed' : ''}`}
                             >
-                                Submit
+                                {loading ? 'Submitting...' : 'Submit Application'} <Send size={20} />
                             </motion.button>
                         </div>
                     </form>

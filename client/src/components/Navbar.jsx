@@ -55,14 +55,14 @@ const Navbar = () => {
           </div>
           
           <div className="flex-1 px-8 py-1 flex justify-end items-center text-white/80">
-            <div className="flex items-center gap-8">
+              <div className="flex items-center gap-8">
               <div className="flex items-center gap-2">
                 <Mail size={14} className="text-primary" fill="currentColor" />
-                <span>needhelp@company.com</span>
+                <span>contact@aevicta.com</span>
               </div>
               <div className="flex items-center gap-2 border-l border-white/20 pl-8">
                 <Clock size={14} className="text-primary" fill="currentColor" />
-                <span>Mon - Sat 8:00 AM - 6:00 PM</span>
+                <span>Mon - Sat 9:00 AM - 6:00 PM</span>
               </div>
             </div>
           </div>
@@ -112,7 +112,7 @@ const Navbar = () => {
               </div>
               <div className="flex flex-col">
                 <span className={`text-[10px] font-medium font-menu uppercase tracking-widest leading-none mb-1 transition-colors duration-500 ${shouldBeWhite ? 'text-slate-400' : 'text-white/60'}`}>Call Anytime</span>
-                <span className={`text-[16px] font-semibold font-display tracking-tight transition-colors duration-500 ${shouldBeWhite ? 'text-slate-900' : 'text-white'}`}>+1 9812310000</span>
+                <span className={`text-[16px] font-semibold font-display tracking-tight transition-colors duration-500 ${shouldBeWhite ? 'text-slate-900' : 'text-white'}`}>+91 9943048554</span>
               </div>
             </div>
 
@@ -159,7 +159,7 @@ const Navbar = () => {
                 </div>
                 <div>
                   <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Customer Support</p>
-                  <p className="text-xl font-black text-slate-900">+1 9812310000</p>
+                  <p className="text-xl font-black text-slate-900">+91 9943048554</p>
                 </div>
               </div>
               

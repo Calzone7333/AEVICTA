@@ -25,17 +25,25 @@ const Introduction = () => {
           >
             <div className="space-y-4">
               <div className="flex items-center gap-3">
-                <span className="text-[12px] font-black uppercase tracking-[0.2em] text-slate-400">Company Introductions</span>
+                <span className="text-[12px] font-black uppercase tracking-[0.2em] text-slate-400">Introduction</span>
                 <div className="h-[2px] w-12 bg-primary"></div>
               </div>
               <h2 className="text-4xl lg:text-5xl font-black text-slate-900 leading-tight tracking-tight">
-                Our Loans will Fill Your <br /> Dreams Come True
+                Your Business Deserves <br /> Better Funding
               </h2>
             </div>
 
-            <p className="content-p max-w-xl">
-              We offer a wide range of loan products tailored to meet your unique needs. Whether it's for a new home, education, or business expansion, our flexible solutions ensure your financial goals are within reach.
-            </p>
+            <div className="space-y-4">
+              <p className="content-p max-w-xl">
+                Every business in Chennai has a story. A dream. A next step waiting to happen. But too often, that next step gets stuck. Not because the business is not ready, but because getting a loan feels like running a marathon with no finish line.
+              </p>
+              <p className="content-p max-w-xl">
+                That is exactly why Aevicta exists. We work with Chennai's entrepreneurs, traders, manufacturers, and growing enterprises to connect them with the right business loan from the right financial institution. Our team understands the local market, the banks, and the paperwork, and we put all of that knowledge to work for you.
+              </p>
+              <p className="text-[13px] font-bold text-primary italic leading-relaxed">
+                Whether you are in Anna Nagar, Ambattur, T. Nagar, Velachery, OMR, Guindy, Chromepet, Perambur, Avadi, Tambaram, Sholinganallur, or anywhere else across Chennai, we are here and we are ready.
+              </p>
+            </div>
 
             <div className="grid sm:grid-cols-2 gap-8 pt-4">
               <div className="flex items-start gap-4">
@@ -43,8 +51,8 @@ const Introduction = () => {
                   <Award size={28} />
                 </div>
                 <div className="space-y-1">
-                  <h4 className="font-black text-slate-900 uppercase text-[14px] tracking-tight">Award Winning</h4>
-                  <p className="content-p !text-[13px]">Finance categories winning more than 10 awards</p>
+                  <h4 className="font-black text-slate-900 uppercase text-[14px] tracking-tight">Local Expertise</h4>
+                  <p className="content-p !text-[13px]">Deep understanding of Chennai's business landscape</p>
                 </div>
               </div>
               <div className="flex items-start gap-4">
@@ -52,8 +60,8 @@ const Introduction = () => {
                   <ShieldCheck size={28} />
                 </div>
                 <div className="space-y-1">
-                  <h4 className="font-black text-slate-900 uppercase text-[14px] tracking-tight">Certified Company</h4>
-                  <p className="content-p !text-[13px]">Approved Finance company to provide loans</p>
+                  <h4 className="font-black text-slate-900 uppercase text-[14px] tracking-tight">Trusted Partner</h4>
+                  <p className="content-p !text-[13px]">Connected with India's most trusted banks</p>
                 </div>
               </div>
             </div>

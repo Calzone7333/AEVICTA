@@ -12,13 +12,30 @@ import FAQ from './pages/FAQ';
 import Blogs from './pages/Blogs';
 import ApplyNow from './pages/ApplyNow';
 import Service from './pages/Service';
+import Login from './pages/Login';
+import Dashboard from './pages/Dashboard';
 import ScrollToTop from './components/ScrollToTop';
 import FloatingButtons from './components/FloatingButtons';
+import { API_BASE_URL } from './apiConfig';
+import { useLocation } from 'react-router-dom';
 
 const AppContent = () => {
+  const location = useLocation();
+
+  React.useEffect(() => {
+    // Log visit on every route change
+    fetch(`${API_BASE_URL}/analytics/log`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ pageUrl: location.pathname })
+    }).catch(err => console.error('Analytics logging failed:', err));
+  }, [location]);
+
+  const isDashboard = location.pathname.startsWith('/dashboard') || location.pathname === '/login';
+
   return (
     <div className="min-h-screen font-sans text-slate-900 overflow-x-hidden">
-      <Navbar />
+      {!isDashboard && <Navbar />}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
@@ -29,9 +46,11 @@ const AppContent = () => {
         <Route path="/faq" element={<FAQ />} />
         <Route path="/apply" element={<ApplyNow />} />
         <Route path="/service" element={<Service />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
-      <Footer />
-      <FloatingButtons />
+      {!isDashboard && <Footer />}
+      {!isDashboard && <FloatingButtons />}
     </div>
   );
 };
@@ -57,4 +76,3 @@ function App() {
 }
 
 export default App;
-
