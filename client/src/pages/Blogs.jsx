@@ -1,75 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Calendar, User, ArrowRight, Search, MessageSquare, Tag, ChevronRight } from 'lucide-react';
+import { Calendar, User, ArrowRight, Search, Tag } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 import { API_BASE_URL } from '../apiConfig';
+import { mockBlogs } from '../data/blogsData';
 
 const Blogs = () => {
     const [blogs, setBlogs] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [expandedId, setExpandedId] = useState(null);
-
-    const toggleExpand = (id) => {
-        setExpandedId(expandedId === id ? null : id);
-    };
-
-    const mockBlogs = [
-        {
-            id: 1,
-            title: "How to Get a Business Loan in Chennai: A Complete Step-by-Step Guide",
-            excerpt: "A practical walkthrough for Chennai business owners covering eligibility criteria, documents required, types of loans available, common mistakes to avoid, and how to improve your approval chances.",
-            content: "A practical walkthrough for Chennai business owners covering eligibility criteria, documents required, types of loans available, common mistakes to avoid, and how to improve your approval chances.",
-            category: "Business Loan",
-            author: "Aevicta Team",
-            createdAt: "2025-05-10"
-        },
-        {
-            id: 2,
-            title: "Working Capital Loan vs Term Loan: Which One Does Your Business Actually Need?",
-            excerpt: "A clear comparison with real-world examples relevant to Chennai businesses, helping owners choose the right loan type for their specific situation.",
-            content: "A clear comparison with real-world examples relevant to Chennai businesses, helping owners choose the right loan type for their specific situation.",
-            category: "Finance Tips",
-            author: "Aevicta Team",
-            createdAt: "2025-05-08"
-        },
-        {
-            id: 3,
-            title: "5 Reasons Business Loans Get Rejected in India (And How to Avoid Every Single One)",
-            excerpt: "A candid, helpful breakdown of why banks reject applications and what business owners can do right now to strengthen their financial profile before applying.",
-            content: "A candid, helpful breakdown of why banks reject applications and what business owners can do right now to strengthen their financial profile before applying.",
-            category: "Business Insights",
-            author: "Aevicta Team",
-            createdAt: "2025-05-05"
-        },
-        {
-            id: 4,
-            title: "MSME Loans in Chennai: Everything You Need to Know in 2025",
-            excerpt: "A comprehensive guide to MSME-specific loan products available through banks in Chennai, covering eligibility, documentation, timelines, and how to apply.",
-            content: "A comprehensive guide to MSME-specific loan products available through banks in Chennai, covering eligibility, documentation, timelines, and how to apply.",
-            category: "MSME",
-            author: "Aevicta Team",
-            createdAt: "2025-05-02"
-        },
-        {
-            id: 5,
-            title: "How to Improve Your Business CIBIL Score Before Applying for a Loan",
-            excerpt: "Actionable steps for Chennai entrepreneurs to strengthen their credit profile and significantly increase their chances of loan approval.",
-            content: "Actionable steps for Chennai entrepreneurs to strengthen their credit profile and significantly increase their chances of loan approval.",
-            category: "Credit Score",
-            author: "Aevicta Team",
-            createdAt: "2025-04-28"
-        },
-        {
-            id: 6,
-            title: "Why Chennai Businesses Are Getting Better Loan Results With Expert Assistance",
-            excerpt: "An honest look at the advantages of having expert support during the loan process, what it saves in time, money, and stress compared to going it alone.",
-            content: "An honest look at the advantages of having expert support during the loan process, what it saves in time, money, and stress compared to going it alone.",
-            category: "Success Stories",
-            author: "Aevicta Team",
-            createdAt: "2025-04-25"
-        }
-    ];
 
     useEffect(() => {
         setBlogs(mockBlogs);
@@ -123,37 +62,24 @@ const Blogs = () => {
                                             </div>
                                         </div>
 
-                                        <h2 className="text-3xl font-black text-[#001a33] hover:text-primary transition-colors leading-tight cursor-pointer" onClick={() => toggleExpand(blog.id)}>
-                                            {blog.title}
-                                        </h2>
+                                        <Link to={`/blog/${blog.id}`}>
+                                            <h2 className="text-3xl font-black text-[#001a33] hover:text-primary transition-colors leading-tight cursor-pointer">
+                                                {blog.title}
+                                            </h2>
+                                        </Link>
 
                                         <p className="text-slate-500 leading-relaxed text-[15px]">
                                             {blog.excerpt}
                                         </p>
 
-                                        <AnimatePresence>
-                                            {expandedId === blog.id && (
-                                                <motion.div
-                                                    initial={{ height: 0, opacity: 0 }}
-                                                    animate={{ height: 'auto', opacity: 1 }}
-                                                    exit={{ height: 0, opacity: 0 }}
-                                                    className="overflow-hidden"
-                                                >
-                                                    <p className="pt-6 text-slate-600 leading-relaxed text-[15px] border-t border-slate-50">
-                                                        {blog.content}
-                                                    </p>
-                                                </motion.div>
-                                            )}
-                                        </AnimatePresence>
-
                                         <div className="pt-6 flex items-center justify-between border-t border-slate-50">
-                                            <button
-                                                onClick={() => toggleExpand(blog.id)}
+                                            <Link
+                                                to={`/blog/${blog.id}`}
                                                 className="flex items-center gap-2 text-slate-900 font-black uppercase text-[13px] tracking-widest group/btn"
                                             >
-                                                <ArrowRight size={16} className={`text-primary transition-transform ${expandedId === blog.id ? 'rotate-90' : 'group-hover/btn:translate-x-1'}`} />
-                                                <span>{expandedId === blog.id ? 'Show Less' : 'Read More'}</span>
-                                            </button>
+                                                <ArrowRight size={16} className={`text-primary transition-transform group-hover/btn:translate-x-1`} />
+                                                <span>Read More</span>
+                                            </Link>
                                         </div>
                                     </div>
                                 </motion.article>
@@ -228,4 +154,3 @@ const Blogs = () => {
 };
 
 export default Blogs;
-

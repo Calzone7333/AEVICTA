@@ -24,10 +24,10 @@ const About = () => {
                     <div className="grid lg:grid-cols-2 gap-20 items-center">
                         <div className="relative flex gap-6">
                             <div className="w-1/2 aspect-[4/5] overflow-hidden rounded-none shadow-xl">
-                                <img src="https://images.unsplash.com/photo-1554224155-1696413575b9?q=80&w=1000&auto=format&fit=crop" alt="Business Meeting" className="w-full h-full object-cover" />
+                                <img src="/about2.jpeg" alt="Business Meeting" className="w-full h-full object-cover" />
                             </div>
                             <div className="w-1/2 aspect-[4/5] overflow-hidden rounded-none shadow-xl relative translate-y-12">
-                                <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1000&auto=format&fit=crop" alt="Loan Consultation" className="w-full h-full object-cover" />
+                                <img src="/about1.jpeg" alt="Loan Consultation" className="w-full h-full object-cover" />
                                 <div className="absolute top-0 right-0 h-full w-12 bg-primary flex items-center justify-center [writing-mode:vertical-lr]">
                                     <span className="text-white font-black text-[12px] uppercase tracking-[0.3em] rotate-180">Who Is Aevicta?</span>
                                 </div>
