@@ -4,7 +4,7 @@
 
 @theme {
     --font-sans: 'Inter', system-ui, sans-serif;
-    --font-display: 'Rajdhani', sans-serif;
+    --font-display: 'Inter', system-ui, sans-serif;
     --font-logo: 'Cinzel', serif;
     --font-menu: 'Public Sans', sans-serif;
 
@@ -40,7 +40,7 @@
     }
 
     h1, h2, h3, h4, h5, h6 {
-        @apply font-display font-black tracking-tight;
+        @apply font-display font-semibold tracking-tight;
     }
 
     html {
@@ -65,23 +65,23 @@
 }
 
 .section-heading {
-    font-family: 'Rajdhani', sans-serif !important;
-    font-size: 38px !important;
-    font-weight: 900 !important;
-    line-height: 48px !important;
+    font-family: 'Inter', system-ui, sans-serif !important;
+    font-size: 30px !important;
+    font-weight: 600 !important;
+    line-height: 40px !important;
     color: oklch(0.208 0.042 265.755) !important;
 }
 
 .faq-question {
-    font-family: 'Rajdhani', sans-serif !important;
-    font-size: 20px !important;
-    font-weight: 900 !important;
+    font-family: 'Inter', system-ui, sans-serif !important;
+    font-size: 18px !important;
+    font-weight: 600 !important;
     line-height: 28px !important;
     color: oklch(0.208 0.042 265.755) !important;
 }
 
 .btn {
-  @apply px-8 py-4 font-black uppercase tracking-widest text-sm transition-all active:scale-[0.98] inline-flex items-center justify-center;
+  @apply px-8 py-4 font-bold uppercase tracking-widest text-sm transition-all active:scale-[0.98] inline-flex items-center justify-center;
 }
 
 .btn-primary {

@@ -27,6 +27,7 @@ const Login = () => {
 
             if (response.ok) {
                 localStorage.setItem('adminToken', data.token);
+                localStorage.setItem('adminUsername', data.username);
                 localStorage.setItem('isAdmin', 'true');
                 navigate('/dashboard');
             } else {
@@ -40,107 +41,90 @@ const Login = () => {
     };
 
     return (
-        <div className="min-h-screen bg-navy flex items-center justify-center p-6 relative overflow-hidden font-sans">
-            {/* Background Decorative Elements */}
-            <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]"></div>
-            <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-[120px] -mr-48 -mt-48"></div>
-            <div className="absolute bottom-0 left-0 w-96 h-96 bg-primary/5 rounded-full blur-[120px] -ml-48 -mb-48"></div>
-
+        <div className="min-h-screen bg-white flex flex-col items-center justify-center p-6 font-sans">
             <motion.div 
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-                className="max-w-md w-full bg-white relative z-10 shadow-2xl overflow-hidden"
+                transition={{ duration: 0.6 }}
+                className="w-full max-w-[400px]"
             >
                 {/* Header Section */}
-                <div className="bg-primary p-10 text-center relative">
-                    <motion.div 
-                        initial={{ scale: 0 }}
-                        animate={{ scale: 1 }}
-                        transition={{ delay: 0.3, type: 'spring', stiffness: 200 }}
-                        className="w-20 h-20 bg-white/20 backdrop-blur-md rounded-none mx-auto flex items-center justify-center mb-6"
-                    >
-                        <ShieldCheck size={40} className="text-white" />
-                    </motion.div>
-                    <h1 className="text-2xl font-black text-white uppercase tracking-widest">Admin Portal</h1>
-                    <p className="text-white/70 text-xs mt-2 font-bold tracking-widest uppercase">Secure Administrative Access</p>
-                    
-                    <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[12px] border-l-transparent border-r-[12px] border-r-transparent border-t-[12px] border-t-primary"></div>
+                <div className="mb-10 text-left">
+                    <h1 className="text-3xl font-bold text-primary mb-2">Welcome Back!</h1>
+                    <p className="text-slate-400 text-sm">Let's track what your AI is doing!</p>
                 </div>
 
                 {/* Form Section */}
-                <div className="p-10 space-y-8">
+                <div className="space-y-6">
                     {error && (
                         <motion.div 
                             initial={{ opacity: 0, x: -10 }}
                             animate={{ opacity: 1, x: 0 }}
-                            className="bg-red-50 border-l-4 border-red-500 p-4 text-red-700 text-xs font-bold uppercase tracking-wider"
+                            className="bg-red-50 text-red-600 p-3 rounded-md text-sm border border-red-100"
                         >
                             {error}
                         </motion.div>
                     )}
 
-                    <form onSubmit={handleLogin} className="space-y-6">
-                        <div className="space-y-2">
-                            <label className="text-[11px] font-black uppercase tracking-widest text-slate-400">Username</label>
-                            <div className="relative group">
-                                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400 group-focus-within:text-primary transition-colors">
-                                    <User size={18} />
-                                </div>
-                                <input 
-                                    type="text" 
-                                    required
-                                    value={formData.username}
-                                    onChange={(e) => setFormData({...formData, username: e.target.value})}
-                                    className="w-full pl-12 pr-4 py-4 bg-slate-50 border border-slate-100 focus:border-primary focus:bg-white outline-none transition-all text-sm font-bold text-navy"
-                                    placeholder="Admin Username"
-                                />
-                            </div>
+                    <form onSubmit={handleLogin} className="space-y-8">
+                        {/* Email/Username Input */}
+                        <div className="relative">
+                            <label className="absolute -top-3 left-3 bg-white px-1 text-sm font-semibold text-slate-700 z-10">Email</label>
+                            <input 
+                                type="text" 
+                                required
+                                value={formData.username}
+                                onChange={(e) => setFormData({...formData, username: e.target.value})}
+                                className="w-full px-4 py-3.5 bg-transparent border-2 border-slate-300 rounded-lg focus:border-primary outline-none transition-colors text-slate-700"
+                                placeholder="Your Email Address"
+                            />
                         </div>
 
-                        <div className="space-y-2">
-                            <label className="text-[11px] font-black uppercase tracking-widest text-slate-400">Password</label>
-                            <div className="relative group">
-                                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400 group-focus-within:text-primary transition-colors">
-                                    <Lock size={18} />
-                                </div>
-                                <input 
-                                    type={showPassword ? 'text' : 'password'} 
-                                    required
-                                    value={formData.password}
-                                    onChange={(e) => setFormData({...formData, password: e.target.value})}
-                                    className="w-full pl-12 pr-12 py-4 bg-slate-50 border border-slate-100 focus:border-primary focus:bg-white outline-none transition-all text-sm font-bold text-navy"
-                                    placeholder="••••••••"
-                                />
-                                <button 
-                                    type="button"
-                                    onClick={() => setShowPassword(!showPassword)}
-                                    className="absolute inset-y-0 right-0 pr-4 flex items-center text-slate-400 hover:text-primary transition-colors"
-                                >
-                                    {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-                                </button>
-                            </div>
+                        {/* Password Input */}
+                        <div className="relative">
+                            <label className="absolute -top-3 left-3 bg-white px-1 text-sm font-semibold text-slate-700 z-10">Password</label>
+                            <input 
+                                type={showPassword ? 'text' : 'password'} 
+                                required
+                                value={formData.password}
+                                onChange={(e) => setFormData({...formData, password: e.target.value})}
+                                className="w-full px-4 py-3.5 bg-transparent border-2 border-slate-300 rounded-lg focus:border-primary outline-none transition-colors text-slate-700"
+                                placeholder="••••••••••••"
+                            />
+                            <button 
+                                type="button"
+                                onClick={() => setShowPassword(!showPassword)}
+                                className="absolute inset-y-0 right-0 pr-4 flex items-center text-slate-400 hover:text-primary transition-colors"
+                            >
+                                {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                            </button>
                         </div>
 
-                        <div className="pt-4">
+                        {/* Remember Me & Forgot Password */}
+                        <div className="flex items-center justify-between mt-2">
+                            <label className="flex items-center gap-2 cursor-pointer group">
+                                <div className="w-4 h-4 rounded-[4px] bg-primary flex items-center justify-center">
+                                    <svg viewBox="0 0 24 24" className="w-3 h-3 text-white fill-current" stroke="currentColor" strokeWidth="2">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                </div>
+                                <span className="text-sm font-semibold text-primary">Remember me</span>
+                            </label>
+                            <a href="#" className="text-sm text-slate-400 hover:text-primary transition-colors">Forgot Password?</a>
+                        </div>
+
+                        <div className="pt-2">
                             <motion.button 
-                                whileHover={{ scale: 1.02 }}
-                                whileTap={{ scale: 0.98 }}
+                                whileHover={{ scale: 1.01 }}
+                                whileTap={{ scale: 0.99 }}
                                 type="submit"
                                 disabled={loading}
-                                className={`w-full bg-navy hover:bg-slate-900 text-white py-5 font-black uppercase tracking-[0.2em] text-[12px] flex items-center justify-center gap-3 transition-all shadow-xl shadow-navy/20 ${loading ? 'opacity-70 cursor-not-allowed' : ''}`}
+                                className={`w-full bg-primary hover:bg-green-700 text-white py-3.5 rounded-lg font-medium text-base transition-colors ${loading ? 'opacity-70 cursor-not-allowed' : ''}`}
                             >
-                                {loading ? 'Authenticating...' : 'Authenticate'} <ArrowRight size={18} />
+                                {loading ? 'Logging in...' : 'Login'}
                             </motion.button>
                         </div>
                     </form>
-
-                    <div className="pt-6 text-center border-t border-slate-50">
-                        <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest leading-loose">
-                            This is a secure system. <br />
-                            Unauthorized access is prohibited.
-                        </p>
-                    </div>
                 </div>
             </motion.div>
         </div>

@@ -31,17 +31,17 @@ const BankPartners = () => {
                 <div className="text-center mb-24 space-y-4">
                     <div className="flex items-center justify-center gap-3">
                         <div className="h-[2px] w-8 bg-primary"></div>
-                        <span className="text-primary font-black uppercase tracking-[0.2em] text-[13px]">Our Network</span>
+                        <span className="text-primary font-semibold uppercase tracking-[0.2em] text-[13px]">Our Network</span>
                         <div className="h-[2px] w-8 bg-primary"></div>
                     </div>
-                    <h2 className="text-4xl lg:text-6xl font-black text-navy tracking-tight">Backed by India's Most Trusted Banks</h2>
+                    <h2 className="text-3xl lg:text-4xl font-semibold text-navy tracking-tight">Backed by India's Most Trusted Banks</h2>
                     <p className="text-slate-500 max-w-2xl mx-auto font-medium">We have direct partnerships and tie-ups with leading financial institutions to ensure you get the best interest rates and fastest approvals.</p>
                 </div>
 
                 {/* Private Sector Banks */}
                 <div className="mb-20">
                     <div className="flex items-center gap-6 mb-12">
-                        <h3 className="text-xl font-black text-navy uppercase tracking-[0.2em] whitespace-nowrap">Private Sector Partners</h3>
+                        <h3 className="text-lg font-semibold text-navy uppercase tracking-[0.2em] whitespace-nowrap">Private Sector Partners</h3>
                         <div className="h-[1px] w-full bg-slate-200"></div>
                     </div>
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
@@ -62,7 +62,7 @@ const BankPartners = () => {
                                         className="max-h-full max-w-full object-contain transition-all duration-500"
                                     />
                                 </div>
-                                <span className="text-[11px] font-black uppercase tracking-wider text-slate-400 group-hover:text-primary transition-colors">{bank.name}</span>
+                                <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-400 group-hover:text-primary transition-colors">{bank.name}</span>
                             </motion.div>
                         ))}
                     </div>
@@ -71,7 +71,7 @@ const BankPartners = () => {
                 {/* Public Sector Banks */}
                 <div>
                     <div className="flex items-center gap-6 mb-12">
-                        <h3 className="text-xl font-black text-navy uppercase tracking-[0.2em] whitespace-nowrap">Public Sector & Nationalized</h3>
+                        <h3 className="text-lg font-semibold text-navy uppercase tracking-[0.2em] whitespace-nowrap">Public Sector & Nationalized</h3>
                         <div className="h-[1px] w-full bg-slate-200"></div>
                     </div>
                     <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
@@ -92,7 +92,7 @@ const BankPartners = () => {
                                         className="max-h-full max-w-full object-contain transition-all duration-500"
                                     />
                                 </div>
-                                <span className="text-[10px] font-black uppercase tracking-wider text-slate-400 group-hover:text-primary transition-colors">{bank.name}</span>
+                                <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-400 group-hover:text-primary transition-colors">{bank.name}</span>
                             </motion.div>
                         ))}
                     </div>

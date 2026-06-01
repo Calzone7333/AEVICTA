@@ -9,7 +9,6 @@ import Loader from './components/Loader';
 import FAQ from './pages/FAQ';
 import Blogs from './pages/Blogs';
 import BlogDetail from './pages/BlogDetail';
-import ApplyNow from './pages/ApplyNow';
 import Service from './pages/Service';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
@@ -42,7 +41,6 @@ const AppContent = () => {
         <Route path="/blogs" element={<Blogs />} />
         <Route path="/blog/:id" element={<BlogDetail />} />
         <Route path="/faq" element={<FAQ />} />
-        <Route path="/apply" element={<ApplyNow />} />
         <Route path="/service" element={<Service />} />
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />

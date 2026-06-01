@@ -3,13 +3,50 @@ import { Award, ShieldCheck } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 import { Link } from 'react-router-dom';
+import { API_BASE_URL } from '../apiConfig';
 
 const Introduction = () => {
-  const [loanAmount, setLoanAmount] = useState(18000);
-  const [loanTerm, setLoanTerm] = useState(8);
+  const [formData, setFormData] = useState({
+    turnover: '',
+    fullName: '',
+    phone: '',
+    email: ''
+  });
+  const [status, setStatus] = useState({ type: '', message: '' });
+  const [loading, setLoading] = useState(false);
 
-  const monthlyPay = (loanAmount / loanTerm).toFixed(2);
-  const totalPayBack = (loanAmount * 1.05).toFixed(0);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setStatus({ type: '', message: '' });
+
+    try {
+      const response = await fetch(`${API_BASE_URL}/forms/loan`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          fullName: formData.fullName,
+          businessName: formData.fullName + ' Business',
+          phone: formData.phone,
+          email: formData.email,
+          loanType: 'Quick Apply (Lead Form)',
+          amount: formData.turnover,
+          message: 'Submitted from Introduction section lead form'
+        })
+      });
+
+      if (response.ok) {
+        setStatus({ type: 'success', message: 'Application submitted successfully! We will contact you shortly.' });
+        setFormData({ turnover: '', fullName: '', phone: '', email: '' });
+      } else {
+        throw new Error('Failed to submit application');
+      }
+    } catch (err) {
+      setStatus({ type: 'error', message: 'Something went wrong. Please try again later.' });
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <section className="relative z-10 pt-32 pb-24 bg-white">
@@ -25,10 +62,10 @@ const Introduction = () => {
           >
             <div className="space-y-4">
               <div className="flex items-center gap-3">
-                <span className="text-[12px] font-black uppercase tracking-[0.2em] text-slate-400">Introduction</span>
+                <span className="text-[12px] font-semibold uppercase tracking-[0.2em] text-slate-400">Introduction</span>
                 <div className="h-[2px] w-12 bg-primary"></div>
               </div>
-              <h2 className="text-4xl lg:text-5xl font-black text-slate-900 leading-tight tracking-tight">
+              <h2 className="text-3xl lg:text-4xl font-semibold text-slate-900 leading-tight tracking-tight">
                 Your Business Deserves <br /> Better Funding
               </h2>
             </div>
@@ -51,7 +88,7 @@ const Introduction = () => {
                   <Award size={28} />
                 </div>
                 <div className="space-y-1">
-                  <h4 className="font-black text-slate-900 uppercase text-[14px] tracking-tight">Local Expertise</h4>
+                  <h4 className="font-semibold text-slate-900 uppercase text-[14px] tracking-tight">Local Expertise</h4>
                   <p className="content-p !text-[13px]">Deep understanding of Chennai's business landscape</p>
                 </div>
               </div>
@@ -60,107 +97,113 @@ const Introduction = () => {
                   <ShieldCheck size={28} />
                 </div>
                 <div className="space-y-1">
-                  <h4 className="font-black text-slate-900 uppercase text-[14px] tracking-tight">Trusted Partner</h4>
+                  <h4 className="font-semibold text-slate-900 uppercase text-[14px] tracking-tight">Trusted Partner</h4>
                   <p className="content-p !text-[13px]">Connected with India's most trusted banks</p>
                 </div>
               </div>
             </div>
           </motion.div>
 
-          {/* Right Side Calculator */}
-          <div className="flex justify-end relative z-30 mt-[-280px] perspective-1000">
-            <motion.div 
-              initial={{ opacity: 0, x: 30, scale: 0.95 }}
-              whileInView={{ opacity: 1, x: 0, scale: 1 }}
-              whileHover={{ rotateX: 2, rotateY: -2, scale: 1.02 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-              className="bg-white rounded-none shadow-2xl overflow-hidden max-w-md w-full border border-slate-100"
-            >
-              <div className="bg-primary p-8 text-center relative overflow-hidden group">
-                <motion.div 
-                  animate={{ x: ["-100%", "200%"] }}
-                  transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12"
-                />
-                <h3 className="text-white text-2xl font-bold font-display uppercase tracking-tight relative z-10">How Much You Need</h3>
-                <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[12px] border-l-transparent border-r-[12px] border-r-transparent border-t-[12px] border-t-primary"></div>
-              </div>
-
-              <div className="p-10 space-y-8 text-slate-800">
-                <div className="space-y-4">
-                  <div className="flex justify-between font-display font-black text-[14px] leading-[21px]" style={{ color: 'oklch(0.208 0.042 265.755)' }}>
-                    <span>₹1000</span>
-                    <motion.span 
-                      key={loanAmount}
-                      initial={{ scale: 1.2 }}
-                      animate={{ scale: 1 }}
-                    >
-                      ₹{loanAmount}
-                    </motion.span>
-                    <span>₹40000</span>
-                  </div>
-                  <input 
-                    type="range" 
-                    min="1000" 
-                    max="40000" 
-                    step="500"
-                    value={loanAmount}
-                    onChange={(e) => setLoanAmount(parseInt(e.target.value))}
-                    className="w-full h-1.5 bg-slate-100 rounded-lg appearance-none cursor-pointer accent-primary"
-                  />
-                </div>
-
-                <div className="space-y-4">
-                  <div className="flex justify-between font-display font-black text-[14px] leading-[21px]" style={{ color: 'oklch(0.208 0.042 265.755)' }}>
-                    <span>1 Month</span>
-                    <motion.span 
-                      key={loanTerm}
-                      initial={{ scale: 1.2 }}
-                      animate={{ scale: 1 }}
-                    >
-                      {loanTerm} Months
-                    </motion.span>
-                    <span>12 Months</span>
-                  </div>
-                  <input 
-                    type="range" 
-                    min="1" 
-                    max="12" 
-                    value={loanTerm}
-                    onChange={(e) => setLoanTerm(parseInt(e.target.value))}
-                    className="w-full h-1.5 bg-slate-100 rounded-lg appearance-none cursor-pointer accent-primary"
-                  />
-                </div>
-
-                <div className="space-y-4 pt-4 border-t border-slate-100">
-                  {['Pay Monthly', 'Term of Use', 'Total Pay Back'].map((label, idx) => (
-                    <div key={idx} className="flex justify-between items-center font-display font-black text-[14px] leading-[21px]" style={{ color: 'oklch(0.208 0.042 265.755)' }}>
-                      <span className="uppercase">{label}</span>
-                      <motion.span 
-                        key={loanAmount + loanTerm}
-                        initial={{ opacity: 0, x: 5 }}
-                        animate={{ opacity: 1, x: 0 }}
-                      >
-                        {label === 'Pay Monthly' ? `₹${monthlyPay}` : label === 'Term of Use' ? `${loanTerm} Months` : `₹${totalPayBack}`}
-                      </motion.span>
+          {/* Right Side Form */}
+          <div className="flex justify-end relative z-30 mt-[-280px]">
+            <div className="w-full max-w-md">
+              <h3 className="bg-[#f8f9fa] text-slate-900 text-lg font-medium py-2 px-4 rounded-t-md text-center">
+                Get <span className="font-bold">Funded</span>
+              </h3>
+              <motion.div 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+                className="bg-[#f8f9fa] border-[3px] border-primary p-5 sm:p-6 w-full shadow-xl rounded-sm"
+              >
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  {status.message && (
+                    <div className={`p-3 text-xs font-bold uppercase tracking-wider border-l-4 ${status.type === 'success' ? 'bg-green-50 border-green-500 text-green-700' : 'bg-red-50 border-red-500 text-red-700'}`}>
+                      {status.message}
                     </div>
-                  ))}
-                </div>
+                  )}
+                  <div className="space-y-1.5">
+                    <label className="block text-slate-800 font-bold text-[13px]">Annual Turnover</label>
+                    <select 
+                      required
+                      value={formData.turnover}
+                      onChange={(e) => setFormData({...formData, turnover: e.target.value})}
+                      className="w-full px-3 py-2 text-sm border border-slate-300 rounded bg-white text-slate-500 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary">
+                      <option value="">Annual Turnover*</option>
+                      <option value="1cr_above">1 Cr & above</option>
+                      <option value="50l_1cr">50 Lac - 1 Cr</option>
+                      <option value="25l_50l">25-50 Lac</option>
+                      <option value="10l_25l">10-25 Lac</option>
+                      <option value="5l_10l">5-10 Lac</option>
+                      <option value="below_5l">Less Than 5 Lac</option>
+                    </select>
+                  </div>
 
-                <motion.div
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  <Link 
-                    to="/apply"
-                    className="block w-full bg-green-500 hover:bg-green-600 text-white py-3.5 font-display font-black uppercase tracking-widest text-center text-[14px] leading-[21px] transition-all rounded-none shadow-lg shadow-green-500/20"
+                  <div className="space-y-1.5">
+                    <label className="block text-slate-800 font-bold text-[13px]">Your full name</label>
+                    <input 
+                      type="text" 
+                      required
+                      value={formData.fullName}
+                      onChange={(e) => setFormData({...formData, fullName: e.target.value})}
+                      placeholder="Name of the Contact Person *"
+                      className="w-full px-3 py-2 text-sm border border-slate-300 rounded bg-white text-slate-700 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary placeholder-slate-400"
+                    />
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <label className="block text-slate-800 font-bold text-[13px]">Phone Number</label>
+                    <div className="flex border border-slate-300 rounded bg-white focus-within:border-primary focus-within:ring-1 focus-within:ring-primary overflow-hidden">
+                      <div className="px-3 py-2 text-sm text-slate-700 flex items-center bg-slate-50 border-r border-slate-200">
+                        +91
+                      </div>
+                      <input 
+                        type="tel" 
+                        required
+                        value={formData.phone}
+                        onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                        placeholder="Ten Digit Mobile No. *"
+                        className="w-full px-3 py-2 text-sm bg-white text-slate-700 focus:outline-none placeholder-slate-400"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <label className="block text-slate-800 font-bold text-[13px]">Email</label>
+                    <input 
+                      type="email" 
+                      required
+                      value={formData.email}
+                      onChange={(e) => setFormData({...formData, email: e.target.value})}
+                      placeholder="Your Email ID *"
+                      className="w-full px-3 py-2 text-sm border border-slate-300 rounded bg-white text-slate-700 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary placeholder-slate-400"
+                    />
+                  </div>
+
+                  <div className="space-y-3 pt-2">
+                    <label className="flex items-start gap-3 cursor-pointer">
+                      <div className="mt-1">
+                        <input type="checkbox" className="w-4 h-4 rounded-sm text-primary focus:ring-primary border-gray-300 accent-primary" defaultChecked />
+                      </div>
+                      <span className="text-[12px] leading-snug text-slate-600">
+                        I (including any person or entity I am authorised to give consent for) have read and agree to Aevicta's{' '}
+                        <a href="#" className="text-primary hover:underline">Privacy Policy</a> and{' '}
+                        <a href="#" className="text-primary hover:underline">Terms & Conditions</a>.
+                      </span>
+                    </label>
+                  </div>
+
+                  <button 
+                    type="submit"
+                    disabled={loading}
+                    className={`w-full bg-green-500 hover:bg-green-600 text-white py-2.5 font-bold uppercase tracking-wide rounded text-[14px] transition-colors mt-2 ${loading ? 'opacity-70 cursor-not-allowed' : ''}`}
                   >
-                    Apply For Loan
-                  </Link>
-                </motion.div>
-              </div>
-            </motion.div>
+                    {loading ? 'Submitting...' : 'APPLY NOW'}
+                  </button>
+                </form>
+              </motion.div>
+            </div>
           </div>
         </div>
       </div>

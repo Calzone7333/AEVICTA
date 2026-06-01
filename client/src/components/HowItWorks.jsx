@@ -28,7 +28,7 @@ const HowItWorks = () => {
                                 <div className="w-16 h-16 bg-primary/5 text-primary rounded-none mx-auto flex items-center justify-center">
                                     <stat.icon size={32} />
                                 </div>
-                                <h3 className="text-4xl font-black text-navy tracking-tight">{stat.val}</h3>
+                                <h3 className="text-3xl font-semibold text-navy tracking-tight">{stat.val}</h3>
                                 <p className="text-[12px] font-bold text-slate-400 uppercase tracking-widest leading-none">{stat.label}</p>
                             </motion.div>
                         ))}

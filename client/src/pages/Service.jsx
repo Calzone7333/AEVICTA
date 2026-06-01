@@ -46,7 +46,7 @@ const Service = () => {
                         <span className="text-white/40">/</span>
                         <span className="text-white/60">Services</span>
                     </div>
-                    <h1 className="text-5xl lg:text-7xl font-black text-white font-display tracking-tight leading-tight">Business Loans, Simplified.</h1>
+                    <h1 className="text-4xl lg:text-5xl font-semibold text-white font-display tracking-tight leading-tight">Business Loans, Simplified.</h1>
                     <p className="text-white/60 text-lg lg:text-xl max-w-2xl mt-6">From the first enquiry to the final approval, we handle the heavy lifting so you get funded faster, smarter, and with zero confusion.</p>
                 </div>
                 <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]"></div>
@@ -74,9 +74,9 @@ const Service = () => {
                                 <div className="w-16 h-16 bg-primary/5 text-primary flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all duration-500 mb-8">
                                     <service.icon size={32} />
                                 </div>
-                                <h3 className="text-2xl font-black text-navy group-hover:text-primary transition-colors mb-4">{service.title}</h3>
+                                <h3 className="text-xl font-semibold text-navy group-hover:text-primary transition-colors mb-4">{service.title}</h3>
                                 <p className="text-slate-500 leading-relaxed text-[15px]">{service.desc}</p>
-                                <div className="pt-8 flex items-center gap-2 text-primary font-black uppercase text-[12px] tracking-widest opacity-0 group-hover:opacity-100 transition-all transform translate-y-2 group-hover:translate-y-0">
+                                <div className="pt-8 flex items-center gap-2 text-primary font-semibold uppercase text-[12px] tracking-widest opacity-0 group-hover:opacity-100 transition-all transform translate-y-2 group-hover:translate-y-0">
                                     <span>Apply Now</span>
                                     <ArrowRight size={14} />
                                 </div>
@@ -90,12 +90,12 @@ const Service = () => {
             <section className="py-32 bg-navy relative overflow-hidden">
                 <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]"></div>
                 <div className="max-w-[1400px] mx-auto px-6 lg:px-8 relative z-10 text-center space-y-8">
-                    <h2 className="text-4xl lg:text-6xl font-black text-white tracking-tight">Not Sure Which Loan Is Right for You?</h2>
+                    <h2 className="text-3xl lg:text-5xl font-semibold text-white tracking-tight">Not Sure Which Loan Is Right for You?</h2>
                     <p className="text-white/60 text-lg lg:text-xl max-w-2xl mx-auto">That is exactly what we are here for. Tell us about your business and your goals, and we will tell you exactly what you need and how to get it.</p>
                     <motion.button 
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        className="bg-primary text-white px-12 py-5 font-black uppercase tracking-widest text-sm shadow-2xl shadow-primary/20"
+                        className="bg-primary text-white px-12 py-5 font-bold uppercase tracking-widest text-sm shadow-2xl shadow-primary/20"
                     >
                         Book a Free Consultation
                     </motion.button>

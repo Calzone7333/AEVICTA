@@ -158,7 +158,7 @@ const FAQ = () => {
                             <p className="text-slate-400 text-sm mb-6 relative z-10 leading-relaxed">
                                 Every business has unique needs. Let us create a custom funding plan just for you.
                             </p>
-                            <Link to="/apply" className="inline-flex items-center gap-2 text-primary font-bold group/link relative z-10">
+                            <Link to="/contact" className="inline-flex items-center gap-2 text-primary font-bold group/link relative z-10">
                                 Apply for Free Assessment
                                 <ArrowRight size={16} className="group-hover/link:translate-x-1 transition-transform" />
                             </Link>

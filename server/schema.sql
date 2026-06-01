@@ -13,6 +13,7 @@ CREATE TABLE IF NOT EXISTS loan_applications (
     loan_type VARCHAR(100),
     amount VARCHAR(100),
     message TEXT,
+    status VARCHAR(50) DEFAULT 'Pending',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -34,4 +35,15 @@ CREATE TABLE IF NOT EXISTS visitor_logs (
     os VARCHAR(100),
     device VARCHAR(100),
     visited_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS blogs (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    excerpt TEXT NOT NULL,
+    content LONGTEXT NOT NULL,
+    category VARCHAR(100) NOT NULL,
+    author VARCHAR(100) NOT NULL,
+    image_url VARCHAR(255),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

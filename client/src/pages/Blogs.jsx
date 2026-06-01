@@ -4,15 +4,24 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 import { API_BASE_URL } from '../apiConfig';
-import { mockBlogs } from '../data/blogsData';
 
 const Blogs = () => {
     const [blogs, setBlogs] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        setBlogs(mockBlogs);
-        setLoading(false);
+        const fetchBlogs = async () => {
+            try {
+                const res = await fetch(`${API_BASE_URL}/blogs`);
+                const data = await res.json();
+                setBlogs(data);
+            } catch (error) {
+                console.error("Failed to fetch blogs:", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchBlogs();
     }, []);
 
     return (
@@ -25,7 +34,7 @@ const Blogs = () => {
                         <span className="text-white/40">/</span>
                         <span className="text-white/60">Blog</span>
                     </div>
-                    <h1 className="text-5xl lg:text-6xl font-black text-white font-display tracking-tight">Blog</h1>
+                    <h1 className="text-4xl lg:text-5xl font-semibold text-white font-display tracking-tight">Blog</h1>
                 </div>
                 <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]"></div>
             </section>
@@ -50,7 +59,7 @@ const Blogs = () => {
                                         <div className="flex flex-wrap items-center gap-6 text-[13px] text-slate-400 font-bold uppercase tracking-widest">
                                             <div className="flex items-center gap-2">
                                                 <Calendar size={14} className="text-primary" />
-                                                <span>{new Date(blog.createdAt).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })}</span>
+                                                <span>{new Date(blog.created_at).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })}</span>
                                             </div>
                                             <div className="flex items-center gap-2">
                                                 <User size={14} className="text-primary" />
@@ -63,7 +72,7 @@ const Blogs = () => {
                                         </div>
 
                                         <Link to={`/blog/${blog.id}`}>
-                                            <h2 className="text-3xl font-black text-[#001a33] hover:text-primary transition-colors leading-tight cursor-pointer">
+                                            <h2 className="text-2xl font-semibold text-[#001a33] hover:text-primary transition-colors leading-tight cursor-pointer">
                                                 {blog.title}
                                             </h2>
                                         </Link>
@@ -75,7 +84,7 @@ const Blogs = () => {
                                         <div className="pt-6 flex items-center justify-between border-t border-slate-50">
                                             <Link
                                                 to={`/blog/${blog.id}`}
-                                                className="flex items-center gap-2 text-slate-900 font-black uppercase text-[13px] tracking-widest group/btn"
+                                                className="flex items-center gap-2 text-slate-900 font-semibold uppercase text-[13px] tracking-widest group/btn"
                                             >
                                                 <ArrowRight size={16} className={`text-primary transition-transform group-hover/btn:translate-x-1`} />
                                                 <span>Read More</span>
@@ -107,7 +116,7 @@ const Blogs = () => {
 
                             {/* Categories */}
                             <div className="bg-white p-8 border border-slate-100 shadow-sm space-y-6">
-                                <h4 className="text-lg font-black text-[#001a33] border-b border-slate-100 pb-4">Categories</h4>
+                                <h4 className="text-lg font-semibold text-[#001a33] border-b border-slate-100 pb-4">Categories</h4>
                                 <ul className="space-y-4">
                                     {Object.entries(
                                         blogs.reduce((acc, b) => {
@@ -130,7 +139,7 @@ const Blogs = () => {
 
                             {/* Tags */}
                             <div className="bg-white p-8 border border-slate-100 shadow-sm space-y-6">
-                                <h4 className="text-lg font-black text-[#001a33] border-b border-slate-100 pb-4">Tags</h4>
+                                <h4 className="text-lg font-semibold text-[#001a33] border-b border-slate-100 pb-4">Tags</h4>
                                 <div className="flex flex-wrap gap-2 pt-2">
                                     {Array.from(new Set(blogs.map(b => b.category.toLowerCase()))).map((tag) => (
                                         <a

@@ -1,16 +1,31 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Calendar, User, Tag, ArrowLeft } from 'lucide-react';
-import { mockBlogs } from '../data/blogsData';
+import { API_BASE_URL } from '../apiConfig';
 
 const BlogDetail = () => {
     const { id } = useParams();
     const [blog, setBlog] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const foundBlog = mockBlogs.find(b => b.id === parseInt(id));
-        setBlog(foundBlog);
+        const fetchBlog = async () => {
+            try {
+                const res = await fetch(`${API_BASE_URL}/blogs/${id}`);
+                if (res.ok) {
+                    const data = await res.json();
+                    setBlog(data);
+                }
+            } catch (error) {
+                console.error("Failed to fetch blog:", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchBlog();
     }, [id]);
+
+    if (loading) return null;
 
     if (!blog) {
         return (
@@ -37,12 +52,12 @@ const BlogDetail = () => {
                         <span className="text-white/40">/</span>
                         <span className="text-white/60">{blog.category}</span>
                     </div>
-                    <h1 className="text-4xl lg:text-5xl font-black text-white font-display tracking-tight leading-tight">{blog.title}</h1>
+                    <h1 className="text-3xl lg:text-4xl font-semibold text-white font-display tracking-tight leading-tight">{blog.title}</h1>
                     
                     <div className="flex flex-wrap items-center justify-center gap-6 text-[13px] text-white/70 font-bold uppercase tracking-widest mt-8">
                         <div className="flex items-center gap-2">
                             <Calendar size={14} className="text-primary" />
-                            <span>{new Date(blog.createdAt).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })}</span>
+                            <span>{new Date(blog.created_at).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })}</span>
                         </div>
                         <div className="flex items-center gap-2">
                             <User size={14} className="text-primary" />
@@ -61,8 +76,13 @@ const BlogDetail = () => {
             <section className="py-24">
                 <div className="max-w-[1000px] mx-auto px-6 lg:px-8">
                     <div className="bg-white p-10 lg:p-16 shadow-sm border border-slate-100">
+                        {blog.image_url && (
+                            <div className="mb-8 text-center">
+                                <img src={blog.image_url} alt={blog.title} className="inline-block w-full max-w-[800px] h-auto max-h-[400px] object-contain" />
+                            </div>
+                        )}
                         <div className="text-slate-600 leading-relaxed text-[16px]">
-                            {blog.content}
+                            <div dangerouslySetInnerHTML={{ __html: blog.content }} />
                         </div>
                     </div>
                     

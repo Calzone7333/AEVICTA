@@ -45,12 +45,13 @@ const LoanServices = () => {
           viewport={{ once: true }}
           className="text-center space-y-4 mb-20"
         >
-          <div className="flex items-center justify-center gap-3">
-            <div className="h-[2px] w-8 bg-primary"></div>
-            <span className="text-[13px] font-black uppercase tracking-[0.2em] text-primary">What We're Offering</span>
-            <div className="h-[2px] w-8 bg-primary"></div>
+          <div className="space-y-4 max-w-2xl mx-auto">
+            <div className="flex items-center justify-center gap-3">
+              <span className="text-[13px] font-semibold uppercase tracking-[0.2em] text-primary">What We're Offering</span>
+              <div className="h-[2px] w-8 bg-primary/30"></div>
+            </div>
+            <h2 className="text-3xl lg:text-5xl font-semibold text-navy tracking-tight leading-tight">How We Help You Get Funded</h2>
           </div>
-          <h2 className="text-4xl lg:text-6xl font-black text-navy tracking-tight leading-tight">How We Help You Get Funded</h2>
           <p className="text-slate-500 max-w-2xl mx-auto font-medium">We specialize in connecting Chennai's businesses with the right capital. Explore our range of financial services.</p>
         </motion.div>
 
@@ -70,7 +71,7 @@ const LoanServices = () => {
                   {service.icon}
                 </div>
                 <div className="space-y-3">
-                  <h3 className="text-2xl font-black text-navy uppercase tracking-tight">
+                  <h3 className="text-xl font-semibold text-navy uppercase tracking-tight">
                     {service.title}
                   </h3>
                   <p className="text-slate-500 font-medium leading-relaxed">
@@ -82,7 +83,7 @@ const LoanServices = () => {
               <div className="pt-8">
                 <motion.button 
                   whileHover={{ x: 5 }}
-                  className="flex items-center gap-3 text-primary font-black uppercase tracking-widest text-[13px]"
+                  className="flex items-center gap-3 text-primary font-semibold uppercase tracking-widest text-[13px]"
                 >
                   Learn More <ArrowRight size={18} />
                 </motion.button>

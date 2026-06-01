@@ -13,7 +13,7 @@ const About = () => {
                         <span className="text-white/40">/</span>
                         <span className="text-white/60 text-[11px] font-bold uppercase tracking-widest">About Us</span>
                     </div>
-                    <h1 className="text-4xl lg:text-7xl font-black text-white font-display tracking-tight leading-tight">We Exist to Make Business Funding Accessible to Every Business in Chennai</h1>
+                    <h1 className="text-4xl lg:text-5xl font-semibold text-white font-display tracking-tight leading-tight">We Exist to Make Business Funding Accessible to Every Business in Chennai</h1>
                 </div>
                 <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]"></div>
             </section>
@@ -29,7 +29,7 @@ const About = () => {
                             <div className="w-1/2 aspect-[4/5] overflow-hidden rounded-none shadow-xl relative translate-y-12">
                                 <img src="/about1.jpeg" alt="Loan Consultation" className="w-full h-full object-cover" />
                                 <div className="absolute top-0 right-0 h-full w-12 bg-primary flex items-center justify-center [writing-mode:vertical-lr]">
-                                    <span className="text-white font-black text-[12px] uppercase tracking-[0.3em] rotate-180">Who Is Aevicta?</span>
+                                    <span className="text-white font-semibold text-[12px] uppercase tracking-[0.3em] rotate-180">Who Is Aevicta?</span>
                                 </div>
                             </div>
                         </div>
@@ -37,10 +37,10 @@ const About = () => {
                         <div className="space-y-8">
                             <div className="space-y-4">
                                 <div className="flex items-center gap-3">
-                                    <span className="text-[12px] font-black uppercase tracking-[0.2em] text-primary">About Aevicta</span>
+                                    <span className="text-[12px] font-semibold uppercase tracking-[0.2em] text-primary">About Aevicta</span>
                                     <div className="h-[2px] w-12 bg-primary"></div>
                                 </div>
-                                <h2 className="text-4xl lg:text-5xl font-black text-navy leading-tight">
+                                <h2 className="text-3xl lg:text-4xl font-semibold text-navy leading-tight">
                                     Your Dedicated Partner in <br /> Business Finance
                                 </h2>
                             </div>
@@ -67,10 +67,10 @@ const About = () => {
                         <div className="space-y-8 order-2 lg:order-1">
                             <div className="space-y-4">
                                 <div className="flex items-center gap-3">
-                                    <span className="text-[12px] font-black uppercase tracking-[0.2em] text-primary">Why We Started</span>
+                                    <span className="text-[12px] font-semibold uppercase tracking-[0.2em] text-primary">Why We Started</span>
                                     <div className="h-[2px] w-12 bg-primary"></div>
                                 </div>
-                                <h2 className="text-4xl lg:text-5xl font-black text-navy leading-tight">
+                                <h2 className="text-3xl lg:text-4xl font-semibold text-navy leading-tight">
                                     Simplifying the Funding <br /> Journey
                                 </h2>
                             </div>
@@ -88,7 +88,7 @@ const About = () => {
                         </div>
                         <div className="order-1 lg:order-2 bg-navy p-12 text-center space-y-8 shadow-2xl relative overflow-hidden">
                              <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]"></div>
-                             <h3 className="text-3xl font-black text-white relative z-10">"Chennai's businesses deserve a better experience. A simpler process. An expert in their corner."</h3>
+                             <h3 className="text-2xl font-semibold text-white relative z-10">"Chennai's businesses deserve a better experience. A simpler process. An expert in their corner."</h3>
                         </div>
                     </div>
                 </div>
@@ -100,10 +100,10 @@ const About = () => {
                     <div className="text-center space-y-4 mb-20">
                         <div className="flex items-center justify-center gap-3">
                             <div className="h-[2px] w-8 bg-primary"></div>
-                            <span className="text-primary font-black uppercase tracking-[0.2em] text-[13px]">Our Values</span>
+                            <span className="text-primary font-semibold uppercase tracking-[0.2em] text-[13px]">Our Values</span>
                             <div className="h-[2px] w-8 bg-primary"></div>
                         </div>
-                        <h2 className="text-4xl lg:text-6xl font-black text-navy tracking-tight">What Drives Everything We Do</h2>
+                        <h2 className="text-3xl lg:text-5xl font-semibold text-navy tracking-tight">What Drives Everything We Do</h2>
                     </div>
 
                     <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -117,7 +117,7 @@ const About = () => {
                                 <div className="w-12 h-12 bg-primary/5 text-primary flex items-center justify-center mb-6 group-hover:bg-primary group-hover:text-white transition-all">
                                     <CheckCircle2 size={24} />
                                 </div>
-                                <h4 className="text-xl font-black text-navy mb-4">{v.title}</h4>
+                                <h4 className="text-lg font-semibold text-navy mb-4">{v.title}</h4>
                                 <p className="text-slate-500 text-[14px] leading-relaxed">{v.desc}</p>
                             </div>
                         ))}
@@ -129,11 +129,11 @@ const About = () => {
             <section className="bg-navy py-24 relative overflow-hidden">
                 <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]"></div>
                 <div className="max-w-[1400px] mx-auto px-6 lg:px-8 relative z-10 flex flex-col md:flex-row items-center justify-between gap-10">
-                    <h3 className="text-4xl font-black text-white max-w-xl text-center md:text-left">Let's Work Together to Grow Your Business</h3>
+                    <h3 className="text-3xl font-semibold text-white max-w-xl text-center md:text-left">Let's Work Together to Grow Your Business</h3>
                     <motion.button 
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        className="bg-primary text-white px-12 py-5 font-black uppercase tracking-widest text-sm shadow-2xl shadow-primary/20"
+                        className="bg-primary text-white px-12 py-5 font-bold uppercase tracking-widest text-sm shadow-2xl shadow-primary/20"
                     >
                         Get in Touch With Us
                     </motion.button>

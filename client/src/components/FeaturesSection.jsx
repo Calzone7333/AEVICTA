@@ -173,7 +173,7 @@ const FeaturesSection = () => {
                                         transition={{ delay: idx * 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                                         className="bg-white p-6 rounded-none flex items-center gap-6 group hover:translate-x-2 transition-all duration-500 border border-slate-100"
                                     >
-                                        <div className="w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center font-black text-lg shrink-0">
+                                        <div className="w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center font-semibold text-lg shrink-0">
                                             {step.id}
                                         </div>
                                         <p className="text-slate-800 font-bold text-[13px] leading-snug">
@@ -204,7 +204,7 @@ const FeaturesSection = () => {
                     >
                         <div className="flex items-center gap-3 justify-center md:justify-start">
                             <div className="h-[2px] w-8 bg-primary"></div>
-                            <span className="text-primary font-black uppercase tracking-[0.2em] text-[13px]">Simple / Transparent / Secure</span>
+                            <span className="text-primary font-semibold uppercase tracking-[0.2em] text-[13px]">Simple / Transparent / Secure</span>
                         </div>
                         <h2 className="section-heading">
                             Get a Business Loans <span className="text-primary underline decoration-primary/20 underline-offset-8">Quickly</span>
@@ -217,8 +217,8 @@ const FeaturesSection = () => {
                         className="shrink-0"
                     >
                         <Link 
-                            to="/apply"
-                            className="bg-primary text-white px-8 py-4 rounded-none font-black uppercase tracking-widest text-sm hover:bg-primary/90 transition-all block ring-4 ring-primary/10"
+                            to="/contact"
+                            className="bg-primary text-white px-8 py-4 rounded-none font-bold uppercase tracking-widest text-sm hover:bg-primary/90 transition-all block ring-4 ring-primary/10"
                         >
                             Apply For Loan Now
                         </Link>

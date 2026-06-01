@@ -5,19 +5,31 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isHidden, setIsHidden] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const lastScrollY = React.useRef(0);
   const location = useLocation();
   const isHomePage = location.pathname === '/';
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > window.innerHeight * 0.8) {
+      const currentScrollY = window.scrollY;
+
+      if (currentScrollY > window.innerHeight * 0.8) {
         setIsScrolled(true);
       } else {
         setIsScrolled(false);
       }
+
+      if (currentScrollY > lastScrollY.current && currentScrollY > 150) {
+        setIsHidden(true);
+      } else {
+        setIsHidden(false);
+      }
+
+      lastScrollY.current = currentScrollY;
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -32,7 +44,6 @@ const Navbar = () => {
     { path: '/', label: 'Home' },
     { path: '/about', label: 'About Us' },
     { path: '/service', label: 'Service' },
-    { path: '/apply', label: 'Loan' },
     { path: '/blogs', label: 'Blog' },
     { path: '/contact', label: 'Contact Us' }
   ];
@@ -40,9 +51,9 @@ const Navbar = () => {
   return (
     <motion.header 
       initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.8, ease: 'easeOut' }}
-      className={`w-full z-[1000] font-sans transition-all duration-500 ${shouldBeWhite ? 'fixed top-0 left-0 bg-white shadow-xl' : 'absolute top-0 left-0 bg-transparent'}`}
+      animate={{ y: isHidden && !isMenuOpen ? '-100%' : 0 }}
+      transition={{ duration: 0.4, ease: 'easeOut' }}
+      className={`w-full z-[1000] font-sans transition-colors duration-500 ${shouldBeWhite ? 'fixed top-0 left-0 bg-white shadow-xl' : 'absolute top-0 left-0 bg-transparent'}`}
     >
       {/* Top Bar - Hidden on Mobile and when scrolled */}
       <div className={`transition-all duration-500 overflow-hidden hidden lg:block ${isScrolled ? 'h-0 opacity-0' : 'h-auto opacity-100'}`}>

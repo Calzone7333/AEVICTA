@@ -1,0 +1,93 @@
+<html>
+<head>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; max-width: 800px; margin: 0 auto; padding: 20px; }
+        h1 { color: #2c3e50; text-align: center; border-bottom: 2px solid #34495e; padding-bottom: 10px; }
+        h2 { color: #e67e22; margin-top: 30px; }
+        ul, ol { margin-bottom: 20px; }
+        li { margin-bottom: 8px; }
+        .highlight { background-color: #f1f2f6; padding: 2px 6px; border-radius: 4px; font-family: monospace; }
+        .box { border: 1px solid #dcdde1; padding: 15px; background-color: #f8f9fa; border-radius: 5px; margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+
+    <h1>Loan Application - Blog Management Guide</h1>
+
+    <h2>1. How to Access the Blog Manager</h2>
+    <ol>
+        <li>Go to your Admin Dashboard login page.</li>
+        <li>Log in using your admin credentials.</li>
+        <li>On the left-hand sidebar menu, click on <strong>Manage Blogs</strong> (the icon that looks like a document).</li>
+    </ol>
+
+    <h2>2. How to Create a New Blog</h2>
+    <p>Once you are on the "Manage Blogs" page, you will see a form titled <strong>Compose New Blog</strong>. Fill in the following details:</p>
+    <ul>
+        <li><strong>Blog Title:</strong> The main heading of your blog post (e.g., "Business Loans in Chennai").</li>
+        <li><strong>Blog Image:</strong> This is the MAIN image that appears at the top of the public blog post. Click "Choose File" to select an image from your computer.</li>
+        <li><strong>Category:</strong> The category of the blog (e.g., Business, Finance).</li>
+        <li><strong>Author:</strong> The name of the person writing the blog.</li>
+        <li><strong>Excerpt:</strong> A short 1-2 sentence summary of the blog. This shows up on the main blogs list page as a preview.</li>
+    </ul>
+
+    <h2>3. How to Write the Content (HTML Support)</h2>
+    <p>The "Content" box supports standard HTML, which means you can format your text exactly how you want it. Here are the basic rules to follow:</p>
+    <div class="box">
+        <ul>
+            <li><strong>Paragraphs:</strong> Wrap your text in <span class="highlight">&lt;p&gt;</span> and <span class="highlight">&lt;/p&gt;</span>. <br/><em>Example:</em> <span class="highlight">&lt;p&gt;This is a paragraph.&lt;/p&gt;</span></li>
+            <li><strong>Bold Text:</strong> Use <span class="highlight">&lt;b&gt;</span> and <span class="highlight">&lt;/b&gt;</span>. <br/><em>Example:</em> <span class="highlight">&lt;p&gt;This is &lt;b&gt;important&lt;/b&gt;.&lt;/p&gt;</span></li>
+            <li><strong>Line Breaks:</strong> If you want to skip a line without creating a new paragraph, use <span class="highlight">&lt;br&gt;</span>.</li>
+            <li><strong>Headings:</strong> Use <span class="highlight">&lt;h3&gt;</span> and <span class="highlight">&lt;/h3&gt;</span> for sub-headings. <br/><em>Example:</em> <span class="highlight">&lt;h3&gt;Eligibility Criteria&lt;/h3&gt;</span></li>
+        </ul>
+        
+        <h4 style="margin-top: 20px; border-top: 1px solid #ccc; padding-top: 15px;">FULL EXAMPLE OF BLOG CONTENT:</h4>
+        <p>You can simply copy and paste this example into the "Content" box and change the text to match your needs:</p>
+        <div style="background: #2c3e50; color: white; padding: 15px; border-radius: 5px; font-family: monospace; white-space: pre-wrap;">&lt;h3&gt;Why Get a Business Loan in Chennai?&lt;/h3&gt;
+&lt;p&gt;Chennai is rapidly growing, and businesses need capital to expand. A &lt;b&gt;business loan&lt;/b&gt; can help you scale operations, buy new equipment, or increase inventory.&lt;/p&gt;
+
+&lt;p&gt;Here are the top reasons to apply:&lt;/p&gt;
+&lt;p&gt;
+  1. Low Interest Rates&lt;br&gt;
+  2. Flexible Repayment&lt;br&gt;
+  3. Quick Approval
+&lt;/p&gt;
+
+&lt;h3&gt;Eligibility Criteria&lt;/h3&gt;
+&lt;p&gt;To apply, you must have a registered business with at least &lt;b&gt;2 years&lt;/b&gt; of operation history.&lt;/p&gt;
+
+&lt;img src="/blog/example-image.jpg" alt="Business Growth" style="max-width: 100%; margin: 20px auto; display: block;" /&gt;
+
+&lt;p&gt;Contact us today to learn more!&lt;/p&gt;</div>
+    </div>
+
+    <h2>4. How to Add Images INSIDE the Blog Content</h2>
+    <p>If you want to add an image right in the middle of your text (not just the main top image):</p>
+    <ol>
+        <li>Place your typing cursor inside the "Content" box exactly where you want the image to appear.</li>
+        <li>Click the small orange <strong>Upload & Insert Image</strong> button located just above the text box.</li>
+        <li>Select an image from your computer.</li>
+        <li>The system will automatically upload it and instantly insert the correct HTML code (e.g., <span class="highlight">&lt;img src="..." /&gt;</span>) directly into your content!</li>
+    </ol>
+
+    <h2>5. Editing and Deleting Blogs</h2>
+    <h3>To Edit an existing blog:</h3>
+    <ol>
+        <li>Look at the table of existing blogs on the right side of the screen.</li>
+        <li>Click the blue <strong>Edit icon</strong> (looks like a pencil) next to the blog you want to change.</li>
+        <li>The form on the left will automatically fill with all the existing content.</li>
+        <li>Make your changes. You can update the text, add inline images, or even click "Remove Image" to delete the main image.</li>
+        <li>Click <strong>Update Blog Post</strong>.</li>
+    </ol>
+
+    <h3>To Delete an existing blog:</h3>
+    <ol>
+        <li>Click the red <strong>Trash icon</strong> next to the blog in the table.</li>
+        <li>Click OK on the confirmation prompt to permanently delete the blog.</li>
+    </ol>
+
+    <hr style="margin-top: 40px;">
+    <p style="text-align: center; color: #7f8c8d;"><em>Congratulations! You are now ready to manage your blogs like a pro!</em></p>
+
+</body>
+</html>

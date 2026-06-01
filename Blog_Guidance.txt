@@ -1,0 +1,78 @@
+LOAN APPLICATION - BLOG MANAGEMENT GUIDE
+========================================
+
+1. HOW TO ACCESS THE BLOG MANAGER
+---------------------------------
+1. Go to your Admin Dashboard login page (e.g., https://aevicta/login).
+2. Log in using your admin credentials.
+3. On the left-hand sidebar, click on "Manage Blogs" (the icon that looks like a document).
+
+
+2. HOW TO CREATE A NEW BLOG
+---------------------------
+Once you are on the "Manage Blogs" page, you will see a form titled "Compose New Blog". Fill in the following details:
+
+- Blog Title: The main heading of your blog post (e.g., "Business Loans in Chennai").
+- Blog Image: This is the MAIN image that appears at the top of the blog. Click "Choose File" to select an image from your computer.
+- Category: The category of the blog (e.g., Business, Finance).
+- Author: The name of the person writing the blog.
+- Excerpt: A short 1-2 sentence summary of the blog. This shows up on the main blogs list page.
+
+
+3. HOW TO WRITE THE CONTENT (HTML SUPPORT)
+------------------------------------------
+The "Content" box supports HTML, which means you can format your text exactly how you want it. 
+
+Basic Formatting Rules:
+- Paragraphs: Wrap your text in <p> and </p>. 
+  Example: <p>This is a paragraph.</p>
+- Bold Text: Use <b> and </b>.
+  Example: <p>This is <b>important</b>.</p>
+- Line Breaks: If you want to skip a line without creating a new paragraph, use <br>
+- Headings: Use <h3> and </h3> for sub-headings.
+  Example: <h3>Eligibility Criteria</h3>
+
+FULL EXAMPLE OF BLOG CONTENT:
+You can simply copy and paste this example into the "Content" box and change the text:
+
+<h3>Why Get a Business Loan in Chennai?</h3>
+<p>Chennai is rapidly growing, and businesses need capital to expand. A <b>business loan</b> can help you scale operations, buy new equipment, or increase inventory.</p>
+
+<p>Here are the top reasons to apply:</p>
+<p>
+  1. Low Interest Rates<br>
+  2. Flexible Repayment<br>
+  3. Quick Approval
+</p>
+
+<h3>Eligibility Criteria</h3>
+<p>To apply, you must have a registered business with at least <b>2 years</b> of operation history.</p>
+
+<img src="/blog/example-image.jpg" alt="Business Growth" style="max-width: 100%; margin: 20px auto; display: block;" />
+
+<p>Contact us today to learn more!</p>
+
+4. HOW TO ADD IMAGES INSIDE THE BLOG CONTENT
+--------------------------------------------
+If you want to add an image in the middle of your text (not just the main top image):
+1. Place your typing cursor inside the "Content" box exactly where you want the image to appear.
+2. Click the small orange "Upload & Insert Image" button located just above the text box.
+3. Select an image from your computer.
+4. The system will automatically upload it and insert the correct HTML code (e.g., <img src="..." />) into your content!
+
+
+5. EDITING AND DELETING BLOGS
+-----------------------------
+To Edit an existing blog:
+1. Look at the table of existing blogs on the right side.
+2. Click the blue "Edit" icon (pencil) next to the blog you want to change.
+3. The form on the left will automatically fill with the existing content.
+4. Make your changes. You can also click "Remove Image" to delete the main image.
+5. Click "Update Blog Post".
+
+To Delete an existing blog:
+1. Click the red "Trash" icon next to the blog in the table.
+2. Confirm the deletion.
+
+
+Congratulations! You are now ready to manage your blogs like a pro!
