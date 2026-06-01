@@ -78,7 +78,11 @@ const BlogDetail = () => {
                     <div className="bg-white p-10 lg:p-16 shadow-sm border border-slate-100">
                         {blog.image_url && (
                             <div className="mb-8 text-center">
-                                <img src={blog.image_url} alt={blog.title} className="inline-block w-full max-w-[800px] h-auto max-h-[400px] object-contain" />
+                                <img 
+                                    src={blog.image_url.startsWith('http') ? blog.image_url : `${window.location.origin}${blog.image_url}`} 
+                                    alt={blog.title} 
+                                    className="inline-block w-full max-w-[800px] h-auto max-h-[400px] object-contain" 
+                                />
                             </div>
                         )}
                         <div className="text-slate-600 leading-relaxed text-[16px]">
