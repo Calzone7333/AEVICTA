@@ -27,6 +27,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Serve uploaded blog images as static files
+app.use('/blog', express.static(uploadDir));
+
 // Database Connection
 const dbConfig = {
     host: process.env.DB_HOST,
