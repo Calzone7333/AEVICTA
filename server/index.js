@@ -205,6 +205,13 @@ app.get('/api/admin/stats', verifyToken, async (req, res) => {
     }
 });
 
+// Inline Image Upload (for content editor)
+app.post('/api/admin/upload-image', verifyToken, upload.single('image'), (req, res) => {
+    if (!req.file) return res.status(400).json({ error: 'No image uploaded' });
+    const url = `/blog/${req.file.filename}`;
+    res.json({ url });
+});
+
 // Admin Blog Management
 app.post('/api/admin/blogs', verifyToken, upload.single('image'), async (req, res) => {
     const { title, excerpt, content, category, author } = req.body;
