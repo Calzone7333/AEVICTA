@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
@@ -16,6 +16,13 @@ import ScrollToTop from './components/ScrollToTop';
 import FloatingButtons from './components/FloatingButtons';
 import { API_BASE_URL } from './apiConfig';
 import { useLocation } from 'react-router-dom';
+
+// Protected route: redirects to /login if not authenticated
+const ProtectedRoute = ({ children }) => {
+  const token = localStorage.getItem('adminToken');
+  if (!token) return <Navigate to="/login" replace />;
+  return children;
+};
 
 const AppContent = () => {
   const location = useLocation();
@@ -43,7 +50,7 @@ const AppContent = () => {
         <Route path="/faq" element={<FAQ />} />
         <Route path="/service" element={<Service />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
       </Routes>
       {!isDashboard && <Footer />}
       {!isDashboard && <FloatingButtons />}
